@@ -1,422 +1,431 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#f5ebe0">
-<title>Imane &amp; Mohamed — 29 Août 2026</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f5ebe0">
+  <title>Imane &amp; Mohamed — 29 Août 2026</title>
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@100;200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@100;200;300;400&family=Great+Vibes&display=swap"
+    rel="stylesheet">
 
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-<!-- Styles -->
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/scenes.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/scenes.css">
 </head>
+
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cring"></div>
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cring"></div>
 
-<!-- Background layers -->
-<div id="bg-color"></div>
-<canvas id="bg-canvas"></canvas>
-<canvas id="petal-canvas"></canvas>
-<canvas id="veil-canvas"></canvas>
-<div id="flash"></div>
+  <!-- Background layers -->
+  <div id="bg-color"></div>
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="petal-canvas"></canvas>
+  <canvas id="veil-canvas"></canvas>
+  <div id="flash"></div>
 
-<!-- Hidden YouTube player -->
-<div id="yt-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></div>
+  <!-- Hidden YouTube player -->
+  <div id="yt-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></div>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      RIBBON INTRO SCREEN
 ═══════════════════════════════════════════ -->
-<div id="ribbon-screen">
-  <div class="ribbon-frame">
-    <div class="c1"></div>
-    <div class="c2"></div>
-  </div>
-
-  <!-- Envelope graphic -->
-  <div class="envelope-wrap">
-    <svg class="envelope-svg" viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="envGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#e8d8c4"/>
-          <stop offset="100%" stop-color="#d4c0a8"/>
-        </linearGradient>
-        <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#e0ccb4"/>
-          <stop offset="100%" stop-color="#cdb898"/>
-        </linearGradient>
-        <filter id="envShadow">
-          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(93,61,46,0.18)"/>
-        </filter>
-        <pattern id="interiorPattern" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <path d="M0 15 L30 15 M15 0 L15 30" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/>
-          <circle cx="15" cy="15" r="1.5" fill="rgba(201,168,76,0.25)"/>
-        </pattern>
-      </defs>
-
-      <!-- Envelope body -->
-      <rect x="10" y="50" width="300" height="150" rx="4"
-        fill="url(#envGrad)" filter="url(#envShadow)"
-        stroke="rgba(184,136,42,0.3)" stroke-width="1"/>
-
-      <!-- Interior (visible when open) -->
-      <g id="envelope-interior">
-        <rect x="10" y="50" width="300" height="150" rx="4" fill="#4a3224"/>
-        <path d="M10 50 L310 50 L310 200 L10 200 Z" fill="url(#interiorPattern)"/>
-      </g>
-
-      <!-- Initials on envelope body -->
-      <text x="160" y="148" text-anchor="middle"
-        font-family="'Great Vibes',cursive" font-size="40"
-        fill="rgba(193,103,79,0.55)">I &amp; M</text>
-
-      <!-- Bottom left/right triangles (envelope sides) -->
-      <path d="M10 50 L160 145 L310 50" fill="rgba(0,0,0,0)" stroke="rgba(184,136,42,0.2)" stroke-width="1"/>
-
-      <!-- Bottom triangle -->
-      <path d="M10 200 L160 128 L310 200 Z" fill="#cfc0a0" opacity="0.8"/>
-
-      <!-- Top flap group (animatable) -->
-      <g id="envelope-flap-group" style="transform-origin:160px 50px;transform-box:fill-box;">
-        <path d="M10 50 L160 138 L310 50 Z"
-          fill="url(#flapGrad)"
-          stroke="rgba(184,136,42,0.25)" stroke-width="1"/>
-        <!-- Gold foil edge inner -->
-        <path d="M15 53 L160 133 L305 53" fill="none" stroke="url(#ribbonGrad)" stroke-width="1.2" opacity="0.7"/>
-      </g>
-
-      <!-- Wax seal on flap -->
-      <g id="wax-seal-group">
-        <circle cx="160" cy="98" r="28" fill="#c1674f"
-          filter="url(#envShadow)"/>
-        <circle cx="160" cy="98" r="28"
-          fill="radial-gradient(circle at 40% 35%, rgba(255,200,160,0.3), transparent)"/>
-        <circle cx="160" cy="98" r="24"
-          fill="none" stroke="rgba(255,210,180,0.3)" stroke-width="1"/>
-        <!-- Star in seal -->
-        <polygon points="160,80 163,92 176,92 166,100 169,112 160,104 151,112 154,100 144,92 157,92"
-          fill="none" stroke="rgba(255,230,200,0.35)" stroke-width="0.8"/>
-        <text x="160" y="93" text-anchor="middle"
-          font-family="'Great Vibes',cursive" font-size="13"
-          fill="rgba(255,245,235,0.92)">I</text>
-        <text x="160" y="103" text-anchor="middle"
-          font-family="'Cormorant Garamond',serif" font-size="7"
-          fill="rgba(255,235,210,0.6)" font-style="italic">&amp;</text>
-        <text x="160" y="117" text-anchor="middle"
-          font-family="'Great Vibes',cursive" font-size="13"
-          fill="rgba(255,245,235,0.92)">M</text>
-      </g>
-    </svg>
-
-    <!-- Ribbon on top -->
-    <svg id="ribbon-svg" class="ribbon-svg" viewBox="0 0 120 100"
-      xmlns="http://www.w3.org/2000/svg" style="transform:translateX(-50%);">
-      <defs>
-        <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#b8882a"/>
-          <stop offset="40%"  stop-color="#e8c96e"/>
-          <stop offset="100%" stop-color="#b8882a"/>
-        </linearGradient>
-        <linearGradient id="ribbonGrad2" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#c9a84c"/>
-          <stop offset="50%"  stop-color="#f5e4a8"/>
-          <stop offset="100%" stop-color="#c9a84c"/>
-        </linearGradient>
-      </defs>
-
-      <!-- Left bow lobe -->
-      <g id="bow-left" style="transform-origin:60px 42px;transform-box:fill-box;">
-        <ellipse cx="34" cy="36" rx="28" ry="16"
-          fill="url(#ribbonGrad)" opacity="0.9"
-          transform="rotate(-25,60,42)"/>
-        <ellipse cx="34" cy="36" rx="22" ry="10"
-          fill="url(#ribbonGrad2)" opacity="0.5"
-          transform="rotate(-25,60,42)"/>
-      </g>
-
-      <!-- Right bow lobe -->
-      <g id="bow-right" style="transform-origin:60px 42px;transform-box:fill-box;">
-        <ellipse cx="86" cy="36" rx="28" ry="16"
-          fill="url(#ribbonGrad)" opacity="0.9"
-          transform="rotate(25,60,42)"/>
-        <ellipse cx="86" cy="36" rx="22" ry="10"
-          fill="url(#ribbonGrad2)" opacity="0.5"
-          transform="rotate(25,60,42)"/>
-      </g>
-
-      <!-- Ribbon tails -->
-      <path d="M50 50 L40 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round"/>
-      <path d="M70 50 L80 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round"/>
-      <!-- Tail shine -->
-      <path d="M52 50 L43 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-      <path d="M68 50 L77 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-
-      <!-- Knot -->
-      <g id="bow-knot" style="transform-origin:60px 44px;transform-box:fill-box;">
-        <ellipse cx="60" cy="44" rx="12" ry="10" fill="url(#ribbonGrad)"/>
-        <ellipse cx="60" cy="44" rx="8"  ry="6"  fill="url(#ribbonGrad2)" opacity="0.6"/>
-      </g>
-    </svg>
-  </div>
-
-  <!-- Hint text -->
-  <div class="ribbon-hint" id="ribbon-hint">
-    <p>Tirez le ruban pour ouvrir</p>
-    <div class="ribbon-hint-arrow"></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     FILM
-═══════════════════════════════════════════ -->
-<div id="film">
-
-  <!-- Music player -->
-  <div id="mplayer" onclick="Music.toggle()" style="display:none;">
-    <div class="vinyl" id="vinyl"></div>
-    <span class="mlabel" id="mlabel">Musique</span>
-  </div>
-
-  <!-- Progress dots -->
-  <div id="progress-dots"></div>
-
-  <!-- ── SCENE 1: I & M ── -->
-  <div class="scene light-bg" id="scene-1">
-    <div class="initials-wrap">
-      <span class="initials-i">I</span>
-      <span class="initials-amp">&amp;</span>
-      <span class="initials-m">M</span>
-      <p class="initials-date">29 Août 2026 · Dar El Ghalia</p>
+  <div id="ribbon-screen">
+    <div class="ribbon-frame">
+      <div class="c1"></div>
+      <div class="c2"></div>
     </div>
-  </div>
 
-  <!-- ── SCENE 2: Bismillah ── -->
-  <div class="scene light-bg" id="scene-2">
-    <div class="scene-ornament"><span>✦</span></div>
-    <p class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="bismillah-sub">Au nom de Dieu, le Tout Miséricordieux, le Très Miséricordieux</p>
-    <div class="scene-ornament" style="margin-top:20px;"><span>✦</span></div>
-  </div>
-
-  <!-- ── SCENE 3: Verset Ar-Rum 21 ── -->
-  <div class="scene light-bg" id="scene-3">
-    <!-- Moroccan Arch Background -->
-    <div class="arch-bg">
-      <svg class="moroccan-arch" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+    <!-- Envelope graphic -->
+    <div class="envelope-wrap">
+      <svg class="envelope-svg" viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="archGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(193,103,79,0.06)"/>
-            <stop offset="100%" stop-color="transparent"/>
+          <linearGradient id="envGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e8d8c4" />
+            <stop offset="100%" stop-color="#d4c0a8" />
+          </linearGradient>
+          <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e0ccb4" />
+            <stop offset="100%" stop-color="#cdb898" />
+          </linearGradient>
+          <filter id="envShadow">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(93,61,46,0.18)" />
+          </filter>
+          <pattern id="interiorPattern" width="30" height="30" patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)">
+            <path d="M0 15 L30 15 M15 0 L15 30" stroke="rgba(201,168,76,0.15)" stroke-width="0.5" />
+            <circle cx="15" cy="15" r="1.5" fill="rgba(201,168,76,0.25)" />
+          </pattern>
+        </defs>
+
+        <!-- Envelope body -->
+        <rect x="10" y="50" width="300" height="150" rx="4" fill="url(#envGrad)" filter="url(#envShadow)"
+          stroke="rgba(184,136,42,0.3)" stroke-width="1" />
+
+        <!-- Interior (visible when open) -->
+        <g id="envelope-interior">
+          <rect x="10" y="50" width="300" height="150" rx="4" fill="#4a3224" />
+          <path d="M10 50 L310 50 L310 200 L10 200 Z" fill="url(#interiorPattern)" />
+        </g>
+
+        <!-- Initials on envelope body -->
+        <text x="160" y="148" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="40"
+          fill="rgba(193,103,79,0.55)">I &amp; M</text>
+
+        <!-- Bottom left/right triangles (envelope sides) -->
+        <path d="M10 50 L160 145 L310 50" fill="rgba(0,0,0,0)" stroke="rgba(184,136,42,0.2)" stroke-width="1" />
+
+        <!-- Bottom triangle -->
+        <path d="M10 200 L160 128 L310 200 Z" fill="#cfc0a0" opacity="0.8" />
+
+        <!-- Top flap group (animatable) -->
+        <g id="envelope-flap-group" style="transform-origin:160px 50px;transform-box:fill-box;">
+          <path d="M10 50 L160 138 L310 50 Z" fill="url(#flapGrad)" stroke="rgba(184,136,42,0.25)" stroke-width="1" />
+          <!-- Gold foil edge inner -->
+          <path d="M15 53 L160 133 L305 53" fill="none" stroke="url(#ribbonGrad)" stroke-width="1.2" opacity="0.7" />
+        </g>
+
+        <!-- Wax seal on flap -->
+        <g id="wax-seal-group">
+          <circle cx="160" cy="98" r="28" fill="#c1674f" filter="url(#envShadow)" />
+          <circle cx="160" cy="98" r="28"
+            fill="radial-gradient(circle at 40% 35%, rgba(255,200,160,0.3), transparent)" />
+          <circle cx="160" cy="98" r="24" fill="none" stroke="rgba(255,210,180,0.3)" stroke-width="1" />
+          <!-- Star in seal -->
+          <polygon points="160,80 163,92 176,92 166,100 169,112 160,104 151,112 154,100 144,92 157,92" fill="none"
+            stroke="rgba(255,230,200,0.35)" stroke-width="0.8" />
+          <text x="160" y="93" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="13"
+            fill="rgba(255,245,235,0.92)">I</text>
+          <text x="160" y="103" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7"
+            fill="rgba(255,235,210,0.6)" font-style="italic">&amp;</text>
+          <text x="160" y="117" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="13"
+            fill="rgba(255,245,235,0.92)">M</text>
+        </g>
+      </svg>
+
+      <!-- Ribbon on top -->
+      <svg id="ribbon-svg" class="ribbon-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg"
+        style="transform:translateX(-50%);">
+        <defs>
+          <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#b8882a" />
+            <stop offset="40%" stop-color="#e8c96e" />
+            <stop offset="100%" stop-color="#b8882a" />
+          </linearGradient>
+          <linearGradient id="ribbonGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c9a84c" />
+            <stop offset="50%" stop-color="#f5e4a8" />
+            <stop offset="100%" stop-color="#c9a84c" />
           </linearGradient>
         </defs>
-        <!-- Outer Arch -->
-        <path class="arch-path-1" d="M 20 450 L 20 220 C 20 180, -5 150, -5 110 C -5 60, 60 20, 150 5 C 240 20, 305 60, 305 110 C 305 150, 280 180, 280 220 L 280 450" fill="url(#archGrad)" stroke="rgba(184,136,42,0.4)" stroke-width="1.5"/>
-        <!-- Inner Arch -->
-        <path class="arch-path-2" d="M 35 450 L 35 220 C 35 185, 10 155, 10 110 C 10 65, 70 28, 150 15 C 230 28, 290 65, 290 110 C 290 155, 265 185, 265 220 L 265 450" fill="none" stroke="rgba(184,136,42,0.25)" stroke-width="0.8"/>
+
+        <!-- Left bow lobe -->
+        <g id="bow-left" style="transform-origin:60px 42px;transform-box:fill-box;">
+          <ellipse cx="34" cy="36" rx="28" ry="16" fill="url(#ribbonGrad)" opacity="0.9"
+            transform="rotate(-25,60,42)" />
+          <ellipse cx="34" cy="36" rx="22" ry="10" fill="url(#ribbonGrad2)" opacity="0.5"
+            transform="rotate(-25,60,42)" />
+        </g>
+
+        <!-- Right bow lobe -->
+        <g id="bow-right" style="transform-origin:60px 42px;transform-box:fill-box;">
+          <ellipse cx="86" cy="36" rx="28" ry="16" fill="url(#ribbonGrad)" opacity="0.9" transform="rotate(25,60,42)" />
+          <ellipse cx="86" cy="36" rx="22" ry="10" fill="url(#ribbonGrad2)" opacity="0.5"
+            transform="rotate(25,60,42)" />
+        </g>
+
+        <!-- Ribbon tails -->
+        <path d="M50 50 L40 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round" />
+        <path d="M70 50 L80 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round" />
+        <!-- Tail shine -->
+        <path d="M52 50 L43 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5" />
+        <path d="M68 50 L77 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5" />
+
+        <!-- Knot -->
+        <g id="bow-knot" style="transform-origin:60px 44px;transform-box:fill-box;">
+          <ellipse cx="60" cy="44" rx="12" ry="10" fill="url(#ribbonGrad)" />
+          <ellipse cx="60" cy="44" rx="8" ry="6" fill="url(#ribbonGrad2)" opacity="0.6" />
+        </g>
       </svg>
     </div>
-    
-    <div class="verse-content">
-      <p class="verse-source-top">Sourate Ar-Rûm · Verset 21</p>
+
+    <!-- Hint text -->
+    <div class="ribbon-hint" id="ribbon-hint">
+      <p>Tirez le ruban pour ouvrir</p>
+      <div class="ribbon-hint-arrow"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+     FILM
+═══════════════════════════════════════════ -->
+  <div id="film">
+
+    <!-- Music player -->
+    <div id="mplayer" onclick="Music.toggle()" style="display:none;">
+      <div class="vinyl" id="vinyl"></div>
+      <span class="mlabel" id="mlabel">Musique</span>
+    </div>
+
+    <!-- Progress dots -->
+    <div id="progress-dots"></div>
+
+    <!-- ── SCENE 1: I & M ── -->
+    <div class="scene light-bg" id="scene-1">
+      <div class="initials-wrap">
+        <span class="initials-i">I</span>
+        <span class="initials-amp">&amp;</span>
+        <span class="initials-m">M</span>
+        <p class="initials-date">29 Août 2026 · Dar El Ghalia</p>
+      </div>
+    </div>
+
+    <!-- ── SCENE 2: Bismillah ── -->
+    <div class="scene light-bg" id="scene-2">
       <div class="scene-ornament"><span>✦</span></div>
-      <p class="verse-arabic" id="quran-ar">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-      <p class="verse-french">« Et parmi Ses signes, Il a créé pour vous des épouses issues de vous-mêmes pour que vous viviez en tranquillité auprès d'elles, et Il a mis entre vous de l'amour et de la miséricorde. »</p>
-      <p class="verse-source">Sourate Ar-Rûm · Verset 21</p>
+      <p class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <p class="bismillah-sub">Au nom de Dieu, le Tout Miséricordieux, le Très Miséricordieux</p>
+      <div class="scene-ornament" style="margin-top:20px;"><span>✦</span></div>
     </div>
-  </div>
 
-  <!-- ── SCENE 4: Les Familles ── -->
-  <div class="scene light-bg" id="scene-4">
-    <p class="families-pre">Avec toute leur joie</p>
-    <div class="scene-ornament"><span>✦</span></div>
-    <p class="families-les">Les familles</p>
-    <p class="families-names">Charaf</p>
-    <p class="families-amp">&amp;</p>
-    <p class="families-names">Bennani</p>
-    <p class="families-sub">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
-  </div>
+    <!-- ── SCENE 3: Verset Ar-Rum 21 ── -->
+    <div class="scene light-bg" id="scene-3">
+      <!-- Moroccan Arch Background -->
+      <div class="arch-bg">
+        <svg class="moroccan-arch" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+          <defs>
+            <linearGradient id="archGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(193,103,79,0.06)" />
+              <stop offset="100%" stop-color="transparent" />
+            </linearGradient>
+          </defs>
+          <!-- Outer Arch -->
+          <path class="arch-path-1"
+            d="M 20 450 L 20 220 C 20 180, -5 150, -5 110 C -5 60, 60 20, 150 5 C 240 20, 305 60, 305 110 C 305 150, 280 180, 280 220 L 280 450"
+            fill="url(#archGrad)" stroke="rgba(184,136,42,0.4)" stroke-width="1.5" />
+          <!-- Inner Arch -->
+          <path class="arch-path-2"
+            d="M 35 450 L 35 220 C 35 185, 10 155, 10 110 C 10 65, 70 28, 150 15 C 230 28, 290 65, 290 110 C 290 155, 265 185, 265 220 L 265 450"
+            fill="none" stroke="rgba(184,136,42,0.25)" stroke-width="0.8" />
+        </svg>
+      </div>
 
-  <!-- ── SCENE 5: Imane & Mohamed ── -->
-  <div class="scene light-bg" id="scene-5">
-    <p class="couple-pre">Deux âmes, une histoire</p>
-    <div id="name-svg-wrap">
-      <p class="couple-names-text">
-        Imane Charaf
-        <span class="et">et</span>
-        Mohamed Bennani
+      <div class="verse-content">
+        <p class="verse-source-top">Sourate Ar-Rûm · Verset 21</p>
+        <div class="scene-ornament"><span>✦</span></div>
+        <p class="verse-arabic" id="quran-ar">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+          لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+        <p class="verse-french">« Et parmi Ses signes, Il a créé pour vous des épouses issues de vous-mêmes pour que
+          vous viviez en tranquillité auprès d'elles, et Il a mis entre vous de l'amour et de la miséricorde. »</p>
+        <p class="verse-source">Sourate Ar-Rûm · Verset 21</p>
+      </div>
+    </div>
+
+    <!-- ── SCENE 4: Les Familles ── -->
+    <div class="scene light-bg" id="scene-4">
+      <p class="families-pre">Avec toute leur joie</p>
+      <div class="scene-ornament" style="margin-bottom: 20px;"><span>✦</span></div>
+      <p class="families-les">Les familles</p>
+      <div class="families-names-wrap">
+        <p class="families-names">Charaf</p>
+        <p class="families-amp">&amp;</p>
+        <p class="families-names">Bennani</p>
+      </div>
+      <p class="families-sub">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
+    </div>
+
+    <!-- ── SCENE 5: Imane & Mohamed ── -->
+    <div class="scene light-bg" id="scene-5">
+      <p class="couple-pre">Deux âmes, une histoire</p>
+      <div id="name-svg-wrap">
+        <p class="couple-names-text">
+          Imane Charaf
+          <span class="et">et</span>
+          Mohamed Bennani
+        </p>
+      </div>
+      <div class="couple-ornament">
+        <div class="orn-dia"></div>
+      </div>
+      <p class="couple-phrase">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils
+        s'unissent pour l'éternité. »</p>
+    </div>
+
+    <!-- ── SCENE 6: Save the Date ── -->
+    <div class="scene light-bg" id="scene-6">
+      <p class="std-eyebrow">À retenir</p>
+      <h2 class="std-save">Save the Date</h2>
+      <div class="scene-ornament"><span>✦</span></div>
+      <div class="std-card">
+        <div class="std-card-inner">
+          <span class="day">Samedi</span>
+          <span class="date-num">29</span>
+          <span class="month-year">Août 2026</span>
+        </div>
+      </div>
+      <div class="std-divider"></div>
+      <p class="std-phrase">Un jour de bonheur que nous serions<br>honorés de partager avec vous.</p>
+      <a class="std-cal"
+        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+%26+Mohamed&dates=20260829T150000Z%2F20260830T000000Z&details=Dar+El+Ghalia%2C+Bouskoura&location=Dar+El+Ghalia%2C+Bouskoura"
+        target="_blank" rel="noopener">
+        📅 &nbsp;Ajouter au calendrier
+      </a>
+    </div>
+
+    <!-- ── SCENE 7: Dar El Ghalia ── -->
+    <div class="scene light-bg" id="scene-7">
+      <p class="venue-eyebrow">Le Lieu</p>
+      <p class="venue-name">Dar El Ghalia</p>
+      <p class="venue-addr">📍 Bouskoura, Casablanca-Settat · Maroc</p>
+
+      <!-- Palace silhouette -->
+      <svg class="venue-palace" id="venue-palace" viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <defs>
+          <linearGradient id="vg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c1674f" />
+            <stop offset="100%" stop-color="rgba(193,103,79,.3)" />
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="200" x2="480" y2="200" stroke="url(#vg)" stroke-width="1" />
+        <rect x="100" y="118" width="280" height="82" fill="rgba(193,103,79,.06)" stroke="url(#vg)" stroke-width="1" />
+        <rect x="34" y="148" width="76" height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8" />
+        <rect x="370" y="148" width="76" height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8" />
+        <path d="M208 200 L208 158 Q240 132 272 158 L272 200Z" fill="rgba(193,103,79,.09)" stroke="url(#vg)"
+          stroke-width="1" />
+        <path d="M136 200 L136 166 Q152 150 168 166 L168 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)"
+          stroke-width=".7" />
+        <path d="M312 200 L312 166 Q328 150 344 166 L344 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)"
+          stroke-width=".7" />
+        <rect x="200" y="56" width="80" height="66" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width="1" />
+        <path d="M200 56 Q240 14 280 56Z" fill="rgba(193,103,79,.09)" stroke="url(#vg)" stroke-width="1" />
+        <path d="M236 18 Q240 10 244 18 Q240 14 236 18Z" fill="none" stroke="#c1674f" stroke-width="1.4" />
+        <circle cx="244" cy="9" r="4.5" fill="none" stroke="#c1674f" stroke-width="1" />
+        <rect x="90" y="86" width="40" height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8" />
+        <path d="M90 86 Q110 66 130 86Z" fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8" />
+        <rect x="350" y="86" width="40" height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8" />
+        <path d="M350 86 Q370 66 390 86Z" fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8" />
+        <g stroke="url(#vg)" stroke-width=".6" fill="rgba(193,103,79,.05)">
+          <path d="M130 116 L130 103 Q138 96 146 103 L146 116Z" />
+          <path d="M158 116 L158 103 Q166 96 174 103 L174 116Z" />
+          <path d="M306 116 L306 103 Q314 96 322 103 L322 116Z" />
+          <path d="M334 116 L334 103 Q342 96 350 103 L350 116Z" />
+          <path d="M218 102 L218 84 Q240 74 262 84 L262 102Z" />
+        </g>
+        <g fill="rgba(193,103,79,.14)" stroke="url(#vg)" stroke-width=".4">
+          <rect x="102" y="110" width="8" height="9" />
+          <rect x="114" y="110" width="8" height="9" />
+          <rect x="126" y="110" width="8" height="9" />
+          <rect x="202" y="48" width="7" height="9" />
+          <rect x="213" y="48" width="7" height="9" />
+          <rect x="224" y="48" width="7" height="9" />
+          <rect x="235" y="48" width="7" height="9" />
+          <rect x="246" y="48" width="7" height="9" />
+          <rect x="257" y="48" width="7" height="9" />
+          <rect x="268" y="48" width="7" height="9" />
+          <rect x="344" y="110" width="8" height="9" />
+          <rect x="356" y="110" width="8" height="9" />
+          <rect x="368" y="110" width="8" height="9" />
+        </g>
+      </svg>
+
+      <a class="venue-waze"
+        href="https://www.waze.com/fr/live-map/directions/ma/casablanca-settat/bouskoura/dar-el-ghalia?utm_campaign=default&utm_medium=lm_share_location&utm_source=waze_website&to=place.ChIJe6ljfV8ppg0RXXsKLbuqVVc"
+        target="_blank" rel="noopener">
+        🗺️ &nbsp;Itinéraire Waze
+      </a>
+    </div>
+
+    <!-- ── SCENE 8: Compte à rebours ── -->
+    <div class="scene light-bg" id="scene-8">
+      <p class="cd-eyebrow">Le grand jour approche</p>
+      <h2 class="cd-title">Compte à rebours</h2>
+      <div class="cd-grid">
+        <div class="cd-tile"><span class="cd-num" id="cdd">000</span><span class="cd-lbl">Jours</span></div>
+        <div class="cd-tile"><span class="cd-num" id="cdh">00</span><span class="cd-lbl">Heures</span></div>
+        <div class="cd-tile"><span class="cd-num" id="cdm">00</span><span class="cd-lbl">Minutes</span></div>
+        <div class="cd-tile"><span class="cd-num" id="cds">00</span><span class="cd-lbl">Secondes</span></div>
+      </div>
+      <p class="cd-info">Samedi 29 Août 2026 · Dar El Ghalia · 17h00</p>
+    </div>
+
+    <!-- ── SCENE 9: Programme ── -->
+    <div class="scene light-bg" id="scene-9">
+      <p class="prog-eyebrow">Le Programme</p>
+      <h2 class="prog-title">Le déroulé de la soirée</h2>
+      <div class="prog-list">
+        <div class="prog-item">
+          <span class="prog-time">17h00</span>
+          <div class="prog-sep"></div>
+          <span class="prog-name">Accueil des invités</span>
+        </div>
+        <div class="prog-item">
+          <span class="prog-time">18h30</span>
+          <div class="prog-sep"></div>
+          <span class="prog-name">Dîner de Gala</span>
+        </div>
+        <div class="prog-item star">
+          <span class="prog-time">19h30</span>
+          <div class="prog-sep"></div>
+          <span class="prog-name">✦ Entrée de la Mariée</span>
+        </div>
+        <div class="prog-item">
+          <span class="prog-time">21h00</span>
+          <div class="prog-sep"></div>
+          <span class="prog-name">Première Danse &amp; Fête</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 10: Merci ── -->
+    <div class="scene light-bg" id="scene-10">
+      <p class="merci-big">Merci</p>
+      <div class="merci-divider">
+        <div class="merci-divider-gem"></div>
+      </div>
+      <p class="merci-sub">Au plaisir de vous compter parmi nous.</p>
+      <p class="merci-recap">
+        29 Août 2026 · Dar El Ghalia · Bouskoura<br>
+        Accueil dès 17h · Entrée de la mariée à 19h30
       </p>
+      <button class="merci-replay" onclick="Film.replay()">
+        ↺ &nbsp;Revoir l'invitation
+      </button>
     </div>
-    <div class="couple-ornament"><div class="orn-dia"></div></div>
-    <p class="couple-phrase">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils s'unissent pour l'éternité. »</p>
-  </div>
 
-  <!-- ── SCENE 6: Save the Date ── -->
-  <div class="scene light-bg" id="scene-6">
-    <p class="std-eyebrow">À retenir</p>
-    <h2 class="std-save">Save the Date</h2>
-    <div class="scene-ornament"><span>✦</span></div>
-    <div class="std-card">
-      <div class="std-card-inner">
-        <span class="day">Samedi</span>
-        <span class="date-num">29</span>
-        <span class="month-year">Août 2026</span>
-      </div>
-    </div>
-    <div class="std-divider"></div>
-    <p class="std-phrase">Un jour de bonheur que nous serions<br>honorés de partager avec vous.</p>
-    <a class="std-cal"
-      href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+%26+Mohamed&dates=20260829T150000Z%2F20260830T000000Z&details=Dar+El+Ghalia%2C+Bouskoura&location=Dar+El+Ghalia%2C+Bouskoura"
-      target="_blank" rel="noopener">
-      📅 &nbsp;Ajouter au calendrier
-    </a>
-  </div>
+  </div><!-- /film -->
 
-  <!-- ── SCENE 7: Dar El Ghalia ── -->
-  <div class="scene light-bg" id="scene-7">
-    <p class="venue-eyebrow">Le Lieu</p>
-    <p class="venue-name">Dar El Ghalia</p>
-    <p class="venue-addr">📍 Bouskoura, Casablanca-Settat · Maroc</p>
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/main.js"></script>
 
-    <!-- Palace silhouette -->
-    <svg class="venue-palace" id="venue-palace" viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <defs>
-        <linearGradient id="vg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#c1674f"/>
-          <stop offset="100%" stop-color="rgba(193,103,79,.3)"/>
-        </linearGradient>
-      </defs>
-      <line x1="0"   y1="200" x2="480" y2="200" stroke="url(#vg)" stroke-width="1"/>
-      <rect x="100"  y="118"  width="280" height="82" fill="rgba(193,103,79,.06)" stroke="url(#vg)" stroke-width="1"/>
-      <rect x="34"   y="148"  width="76"  height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
-      <rect x="370"  y="148"  width="76"  height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
-      <path d="M208 200 L208 158 Q240 132 272 158 L272 200Z" fill="rgba(193,103,79,.09)" stroke="url(#vg)" stroke-width="1"/>
-      <path d="M136 200 L136 166 Q152 150 168 166 L168 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width=".7"/>
-      <path d="M312 200 L312 166 Q328 150 344 166 L344 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width=".7"/>
-      <rect x="200"  y="56"   width="80"  height="66" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width="1"/>
-      <path d="M200 56 Q240 14 280 56Z"                     fill="rgba(193,103,79,.09)" stroke="url(#vg)" stroke-width="1"/>
-      <path d="M236 18 Q240 10 244 18 Q240 14 236 18Z"      fill="none" stroke="#c1674f" stroke-width="1.4"/>
-      <circle cx="244" cy="9" r="4.5" fill="none" stroke="#c1674f" stroke-width="1"/>
-      <rect x="90"   y="86"   width="40"  height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
-      <path d="M90 86 Q110 66 130 86Z"                      fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8"/>
-      <rect x="350"  y="86"   width="40"  height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
-      <path d="M350 86 Q370 66 390 86Z"                     fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8"/>
-      <g stroke="url(#vg)" stroke-width=".6" fill="rgba(193,103,79,.05)">
-        <path d="M130 116 L130 103 Q138 96 146 103 L146 116Z"/>
-        <path d="M158 116 L158 103 Q166 96 174 103 L174 116Z"/>
-        <path d="M306 116 L306 103 Q314 96 322 103 L322 116Z"/>
-        <path d="M334 116 L334 103 Q342 96 350 103 L350 116Z"/>
-        <path d="M218 102 L218 84 Q240 74 262 84 L262 102Z"/>
-      </g>
-      <g fill="rgba(193,103,79,.14)" stroke="url(#vg)" stroke-width=".4">
-        <rect x="102" y="110" width="8" height="9"/>
-        <rect x="114" y="110" width="8" height="9"/>
-        <rect x="126" y="110" width="8" height="9"/>
-        <rect x="202" y="48"  width="7" height="9"/>
-        <rect x="213" y="48"  width="7" height="9"/>
-        <rect x="224" y="48"  width="7" height="9"/>
-        <rect x="235" y="48"  width="7" height="9"/>
-        <rect x="246" y="48"  width="7" height="9"/>
-        <rect x="257" y="48"  width="7" height="9"/>
-        <rect x="268" y="48"  width="7" height="9"/>
-        <rect x="344" y="110" width="8" height="9"/>
-        <rect x="356" y="110" width="8" height="9"/>
-        <rect x="368" y="110" width="8" height="9"/>
-      </g>
-    </svg>
+  <script>
+    // Boot sequence
+    window.addEventListener('DOMContentLoaded', () => {
+      Particles.initPetals();
+      Particles.initDust();
 
-    <a class="venue-waze"
-      href="https://www.waze.com/fr/live-map/directions/ma/casablanca-settat/bouskoura/dar-el-ghalia?utm_campaign=default&utm_medium=lm_share_location&utm_source=waze_website&to=place.ChIJe6ljfV8ppg0RXXsKLbuqVVc"
-      target="_blank" rel="noopener">
-      🗺️ &nbsp;Itinéraire Waze
-    </a>
-  </div>
-
-  <!-- ── SCENE 8: Compte à rebours ── -->
-  <div class="scene light-bg" id="scene-8">
-    <p class="cd-eyebrow">Le grand jour approche</p>
-    <h2 class="cd-title">Compte à rebours</h2>
-    <div class="cd-grid">
-      <div class="cd-tile"><span class="cd-num" id="cdd">000</span><span class="cd-lbl">Jours</span></div>
-      <div class="cd-tile"><span class="cd-num" id="cdh">00</span><span class="cd-lbl">Heures</span></div>
-      <div class="cd-tile"><span class="cd-num" id="cdm">00</span><span class="cd-lbl">Minutes</span></div>
-      <div class="cd-tile"><span class="cd-num" id="cds">00</span><span class="cd-lbl">Secondes</span></div>
-    </div>
-    <p class="cd-info">Samedi 29 Août 2026 · Dar El Ghalia · 17h00</p>
-  </div>
-
-  <!-- ── SCENE 9: Programme ── -->
-  <div class="scene light-bg" id="scene-9">
-    <p class="prog-eyebrow">Le Programme</p>
-    <h2 class="prog-title">Le déroulé de la soirée</h2>
-    <div class="prog-list">
-      <div class="prog-item">
-        <span class="prog-time">17h00</span>
-        <div class="prog-sep"></div>
-        <span class="prog-name">Accueil des invités</span>
-      </div>
-      <div class="prog-item">
-        <span class="prog-time">18h30</span>
-        <div class="prog-sep"></div>
-        <span class="prog-name">Dîner de Gala</span>
-      </div>
-      <div class="prog-item star">
-        <span class="prog-time">19h30</span>
-        <div class="prog-sep"></div>
-        <span class="prog-name">✦ Entrée de la Mariée</span>
-      </div>
-      <div class="prog-item">
-        <span class="prog-time">21h00</span>
-        <div class="prog-sep"></div>
-        <span class="prog-name">Première Danse &amp; Fête</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── SCENE 10: Merci ── -->
-  <div class="scene light-bg" id="scene-10">
-    <p class="merci-big">Merci</p>
-    <div class="merci-divider"><div class="merci-divider-gem"></div></div>
-    <p class="merci-sub">Au plaisir de vous compter parmi nous.</p>
-    <p class="merci-recap">
-      29 Août 2026 · Dar El Ghalia · Bouskoura<br>
-      Accueil dès 17h · Entrée de la mariée à 19h30
-    </p>
-    <button class="merci-replay" onclick="Film.replay()">
-      ↺ &nbsp;Revoir l'invitation
-    </button>
-  </div>
-
-</div><!-- /film -->
-
-<!-- Scripts -->
-<script src="js/particles.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/intro.js"></script>
-<script src="js/main.js"></script>
-
-<script>
-  // Boot sequence
-  window.addEventListener('DOMContentLoaded', () => {
-    Particles.initPetals();
-    Particles.initDust();
-
-    // Start ribbon interaction
-    Intro.init(() => {
-      // Ribbon pulled — film starts
-      Film.start();
+      // Start ribbon interaction
+      Intro.init(() => {
+        // Ribbon pulled — film starts
+        Film.start();
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
