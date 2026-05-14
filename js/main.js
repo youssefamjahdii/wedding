@@ -125,13 +125,15 @@ const Film = (() => {
         break;
 
       case 2: // Verset
-        tl.from(`${sel} .verse-source-top`, { opacity: 0, y: 10, duration: 0.7 }, at + 0.1)
-          .to(`${sel} .verse-source-top`, { opacity: 1, duration: 0.7 }, at + 0.1)
-          .call(() => lightVerseWords(0.3), [], at + 0.4)
-          .from(`${sel} .verse-french`, { opacity: 0, y: 16, duration: 1, ease: 'power2.out' }, at + 2.2)
-          .to(`${sel} .verse-french`, { opacity: 1, duration: 1 }, at + 2.2)
-          .from(`${sel} .verse-source`, { opacity: 0, duration: 0.6 }, at + 3.2)
-          .to(`${sel} .verse-source`, { opacity: 1, duration: 0.6 }, at + 3.2);
+        tl.to(`${sel} .arch-bg`, { opacity: 1, duration: 1.5, ease: 'power2.inOut' }, at)
+          .call(() => { const a = document.querySelector(`${sel} .arch-bg`); if(a) a.classList.add('draw'); }, [], at + 0.1)
+          .from(`${sel} .verse-source-top`, { opacity: 0, y: 10, duration: 0.7 }, at + 0.4)
+          .to(`${sel} .verse-source-top`, { opacity: 1, duration: 0.7 }, at + 0.4)
+          .call(() => lightVerseWords(0.3), [], at + 0.7)
+          .from(`${sel} .verse-french`, { opacity: 0, y: 16, duration: 1, ease: 'power2.out' }, at + 2.5)
+          .to(`${sel} .verse-french`, { opacity: 1, duration: 1 }, at + 2.5)
+          .from(`${sel} .verse-source`, { opacity: 0, duration: 0.6 }, at + 3.5)
+          .to(`${sel} .verse-source`, { opacity: 1, duration: 0.6 }, at + 3.5);
         break;
 
       case 3: // Familles — music starts here
@@ -318,6 +320,8 @@ const Film = (() => {
     setDot(0); currentScene = 0;
     const v = document.getElementById('venue-palace');
     if (v) v.classList.remove('draw');
+    const a = document.querySelector('.arch-bg');
+    if (a) a.classList.remove('draw');
     Countdown.start();
     tl.restart();
   }
