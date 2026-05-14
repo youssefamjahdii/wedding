@@ -58,6 +58,10 @@
         <filter id="envShadow">
           <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(93,61,46,0.18)"/>
         </filter>
+        <pattern id="interiorPattern" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <path d="M0 15 L30 15 M15 0 L15 30" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/>
+          <circle cx="15" cy="15" r="1.5" fill="rgba(201,168,76,0.25)"/>
+        </pattern>
       </defs>
 
       <!-- Envelope body -->
@@ -66,7 +70,10 @@
         stroke="rgba(184,136,42,0.3)" stroke-width="1"/>
 
       <!-- Interior (visible when open) -->
-      <rect x="10" y="50" width="300" height="150" rx="4" fill="#fdf6ec"/>
+      <g id="envelope-interior">
+        <rect x="10" y="50" width="300" height="150" rx="4" fill="#4a3224"/>
+        <path d="M10 50 L310 50 L310 200 L10 200 Z" fill="url(#interiorPattern)"/>
+      </g>
 
       <!-- Initials on envelope body -->
       <text x="160" y="148" text-anchor="middle"
@@ -84,6 +91,8 @@
         <path d="M10 50 L160 138 L310 50 Z"
           fill="url(#flapGrad)"
           stroke="rgba(184,136,42,0.25)" stroke-width="1"/>
+        <!-- Gold foil edge inner -->
+        <path d="M15 53 L160 133 L305 53" fill="none" stroke="url(#ribbonGrad)" stroke-width="1.2" opacity="0.7"/>
       </g>
 
       <!-- Wax seal on flap -->
@@ -236,12 +245,14 @@
   <!-- ── SCENE 6: Save the Date ── -->
   <div class="scene light-bg" id="scene-6">
     <p class="std-eyebrow">À retenir</p>
-    <p class="std-save">Save the Date</p>
+    <h2 class="std-save">Save the Date</h2>
     <div class="scene-ornament"><span>✦</span></div>
-    <div class="std-date">
-      <span class="day">Samedi</span>
-      <span class="month">29 Août</span>
-      <span class="year">2026</span>
+    <div class="std-card">
+      <div class="std-card-inner">
+        <span class="day">Samedi</span>
+        <span class="date-num">29</span>
+        <span class="month-year">Août 2026</span>
+      </div>
     </div>
     <div class="std-divider"></div>
     <p class="std-phrase">Un jour de bonheur que nous serions<br>honorés de partager avec vous.</p>

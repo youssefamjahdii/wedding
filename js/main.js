@@ -177,14 +177,10 @@ const Film = (() => {
           .to(`${sel} .std-eyebrow`, { opacity: 1, duration: 0.5 }, at + 0.1)
           .from(`${sel} .std-save`, { opacity: 0, y: 8, duration: 0.5 }, at + 0.3)
           .to(`${sel} .std-save`, { opacity: 1, duration: 0.5 }, at + 0.3)
-          // Date parts fly in from sides
-          .from(`${sel} .day`, { x: -60, opacity: 0, duration: 0.8, ease: 'power3.out' }, at + 0.55)
-          .to(`${sel} .day`, { opacity: 1, duration: 0.8 }, at + 0.55)
-          .from(`${sel} .month`, { x: 60, opacity: 0, duration: 0.8, ease: 'power3.out' }, at + 0.75)
-          .to(`${sel} .month`, { opacity: 1, duration: 0.8 }, at + 0.75)
-          .from(`${sel} .year`, { opacity: 0, y: 12, duration: 0.6 }, at + 1.1)
-          .to(`${sel} .year`, { opacity: 1, duration: 0.6 }, at + 1.1)
-          .to(`${sel} .std-divider`, { width: '180px', duration: 1, ease: 'power2.out' }, at + 1.2)
+          // Card drops in
+          .from(`${sel} .std-card`, { y: 30, opacity: 0, duration: 0.8, ease: 'power2.out' }, at + 0.55)
+          .to(`${sel} .std-card`, { opacity: 1, duration: 0.8 }, at + 0.55)
+          .to(`${sel} .std-divider`, { width: '180px', duration: 1, ease: 'power2.out' }, at + 1.0)
           .from(`${sel} .std-phrase`, { opacity: 0, y: 12, duration: 0.8 }, at + 1.6)
           .to(`${sel} .std-phrase`, { opacity: 1, duration: 0.8 }, at + 1.6)
           .from(`${sel} .std-cal`, { opacity: 0, y: 12, duration: 0.7 }, at + 2.1)

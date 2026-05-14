@@ -422,44 +422,53 @@
   margin-bottom: 12px;
 }
 .std-save {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3.5rem, 12vw, 6rem);
+  color: var(--terra);
+  text-shadow: 2px 4px 15px rgba(193,103,79,0.15);
+  margin-bottom: 8px;
+  opacity: 0;
+  line-height: 1;
+}
+.std-card {
+  border: 1px solid rgba(184,136,42,0.3);
+  padding: 8px;
+  margin: 16px auto;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.std-card-inner {
+  border: 1px solid rgba(184,136,42,0.15);
+  padding: 24px 40px;
+  background: rgba(253, 246, 236, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.std-card .day {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
-  font-size: clamp(0.65rem, 2vw, 0.85rem);
-  letter-spacing: 0.8em;
-  text-transform: uppercase;
-  color: rgba(93, 61, 46, 0.5);
-  opacity: 0;
-  margin-bottom: 8px;
-}
-.std-the {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 100;
-  font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+  font-size: var(--fs-xs);
   letter-spacing: 0.6em;
   text-transform: uppercase;
-  color: rgba(93, 61, 46, 0.35);
-  opacity: 0;
-  margin-bottom: 4px;
+  color: rgba(93, 61, 46, 0.5);
+  margin-bottom: 8px;
 }
-.std-date {
+.std-card .date-num {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 11vw, 7rem);
-  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 6rem);
+  font-weight: 400;
   color: var(--terra);
-  line-height: 1;
-  opacity: 0;
+  line-height: 0.9;
 }
-.std-date .day   { display: block; opacity: 0; transform: translateX(-50px); }
-.std-date .month { display: block; opacity: 0; transform: translateX(50px); font-style: italic; }
-.std-date .year  {
-  display: block;
-  font-size: 0.38em;
-  font-weight: 300;
+.std-card .month-year {
+  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  color: var(--gold);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--mocha);
+  margin-top: 10px;
   letter-spacing: 0.1em;
-  opacity: 0;
-  transform: translateY(10px);
 }
 .std-divider {
   width: 0;
