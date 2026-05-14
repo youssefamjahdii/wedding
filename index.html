@@ -1,1504 +1,393 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Imane & SiMohamed — 29 Août 2026</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@100;200;300;400&family=Great+Vibes&display=swap"
-    rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --espresso: #1a1512;
-      --mocha: #2d241e;
-      --champagne: #f7edda;
-      --ivory: #fdf6e8;
-      --gold: #c9a84c;
-      --gold2: #e8c96e;
-      --gold3: #f5e4a8;
-      --blush: #e3cbc3;
-      --text: #2a1c0c;
-      --terracotta: #cc5b43;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: var(--espresso);
-      color: var(--ivory);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      cursor: none;
-    }
-
-    /* Grain overlay */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 9997;
-    }
-
-    /* ── CURSOR ── */
-    .cursor {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width .3s, height .3s;
-      mix-blend-mode: screen;
-    }
-
-    .cursor-ring {
-      position: fixed;
-      width: 32px;
-      height: 32px;
-      border: 1px solid rgba(201, 168, 76, .4);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width .3s, height .3s, border-color .3s;
-    }
-
-    @media(max-width:768px) {
-
-      .cursor,
-      .cursor-ring {
-        display: none !important;
-      }
-
-      body {
-        cursor: auto;
-      }
-    }
-
-    /* ── INTRO / ENVELOPE ── */
-    #intro {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--champagne);
-      transition: opacity 1.5s ease, visibility 1.5s;
-    }
-
-    #intro.out {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .env-wrap { position: absolute; width: 100%; max-width: 600px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-    .env-back { position: absolute; inset: 0; background: var(--mocha); border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .env-flap { position: absolute; top: 0; left: 0; width: 100%; height: 60%; background: var(--mocha); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); border-bottom: 1px solid rgba(201,168,76,0.3); z-index: 2; }
-    .env-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; clip-path: polygon(0 100%, 50% 40%, 100% 100%, 100% 100%, 0 100%); background: var(--espresso); border-top: 1px solid rgba(201,168,76,0.2); z-index: 3; }
-    #intro.cracking .env-flap { transform: rotateX(180deg); }
-
-    .seal-wrap {
-      position: relative;
-      cursor: none;
-      animation: sealPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes sealPulse {
-
-      0%,
-      100% {
-        filter: drop-shadow(0 0 12px rgba(201, 168, 76, .4));
-      }
-
-      50% {
-        filter: drop-shadow(0 0 28px rgba(201, 168, 76, .8));
-      }
-    }
-
-    .seal-svg {
-      width: 136px;
-      height: 136px;
-    }
-
-    .seal-hint {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: .65rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      margin-top: 28px;
-      text-align: center;
-      animation: breathe 2.5s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-
-      0%,
-      100% {
-        opacity: .5;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-    .seal-wrap.cracking .seal-svg {
-      animation: sealCrack .8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    @keyframes sealCrack {
-      0% {
-        transform: scale(1);
-      }
-
-      30% {
-        transform: scale(1.15) rotate(-5deg);
-      }
-
-      100% {
-        transform: scale(3) rotate(15deg);
-        opacity: 0;
-      }
-    }
-
-    .spark {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--gold2);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkFly .9s ease forwards;
-    }
-
-    @keyframes sparkFly {
-      0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* ── NAME SCREEN TRANSITION ── */
-    #name-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 900;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--espresso);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1.2s, visibility 1.2s;
-    }
-
-    #name-screen.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    #name-screen.out {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .wn {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(3rem, 11vw, 6.5rem);
-      background: linear-gradient(135deg, var(--gold), var(--gold2), var(--gold3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: block;
-      opacity: 0;
-      line-height: 1.1;
-      text-align: center;
-      padding-right: 0.15em;
-    }
-
-    .wn.a1 {
-      animation: nameIn 2s .1s ease forwards;
-    }
-
-    .wn.a2 {
-      animation: nameIn 2s .4s ease forwards;
-    }
-
-    @keyframes nameIn {
-      from {
-        opacity: 0;
-        filter: blur(10px);
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        filter: blur(0);
-        transform: none;
-      }
-    }
-
-    .wet {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1rem, 3vw, 1.8rem);
-      color: var(--gold);
-      display: block;
-      margin: 10px 0;
-      opacity: 0;
-      text-align: center;
-      animation: fuslide 1s 1s ease forwards;
-    }
-
-    @keyframes fuslide {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    .cbtn {
-      margin-top: 44px;
-      padding: 14px 48px;
-      border: 1px solid rgba(201, 168, 76, .4);
-      background: transparent;
-      color: var(--gold);
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
-      font-size: .65rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      cursor: none;
-      opacity: 0;
-      animation: fuslide 1s 2s ease forwards;
-      transition: background .4s, border-color .4s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cbtn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(201, 168, 76, .12);
-      transform: translateX(-100%);
-      transition: transform .4s;
-    }
-
-    .cbtn:hover::before {
-      transform: translateX(0);
-    }
-
-    .cbtn:hover {
-      border-color: var(--gold);
-    }
-
-    /* ── SLIDER ARCHITECTURE ── */
-    #main {
-      position: fixed;
-      inset: 0;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s, visibility 1s;
-      z-index: 100;
-    }
-
-    #main.on {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1), filter 1s ease;
-      transform: scale(0.95);
-      filter: blur(8px);
-      padding: 40px 24px;
-      text-align: center;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: scale(1);
-      filter: blur(0);
-    }
-
-    .slide.prev {
-      transform: scale(1.05);
-      filter: blur(8px);
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .slide > * {
-      opacity: 0;
-      transform: translateY(20px) translate(var(--px, 0px), var(--py, 0px));
-      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .slide.active > * {
-      opacity: 1;
-      transform: translateY(0) translate(var(--px, 0px), var(--py, 0px));
-    }
-    .slide.active > *:nth-child(1) { transition-delay: 0.1s; }
-    .slide.active > *:nth-child(2) { transition-delay: 0.3s; }
-    .slide.active > *:nth-child(3) { transition-delay: 0.5s; }
-    .slide.active > *:nth-child(4) { transition-delay: 0.7s; }
-    .slide.active > *:nth-child(5) { transition-delay: 0.9s; }
-    .slide.active > *:nth-child(6) { transition-delay: 1.1s; }
-    .slide.active > *:nth-child(7) { transition-delay: 1.3s; }
-    .slide.active > *:nth-child(8) { transition-delay: 1.5s; }
-    .slide.active > *:nth-child(9) { transition-delay: 1.7s; }
-    .slide.active > *:nth-child(10) { transition-delay: 1.9s; }
-    .slide.active > *:nth-child(11) { transition-delay: 2.1s; }
-
-    /* Navigation Dots */
-    #slide-nav {
-      position: fixed;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 500;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    #main.on #slide-nav {
-      opacity: 1;
-    }
-
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(201, 168, 76, .3);
-      cursor: none;
-      transition: background .3s, transform .3s;
-    }
-
-    .nav-dot.active {
-      background: var(--gold);
-      transform: scale(1.5);
-    }
-
-    /* Slide Controls */
-    .slide-controls {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 40px;
-      z-index: 500;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    #main.on .slide-controls {
-      opacity: 1;
-    }
-
-    .ctrl-btn {
-      background: none;
-      border: none;
-      color: rgba(201, 168, 76, .6);
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: .65rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      cursor: none;
-      transition: color .3s;
-      padding: 10px;
-    }
-
-    .ctrl-btn:hover {
-      color: var(--gold);
-    }
-
-    .ctrl-btn:disabled {
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    /* ── PROGRESS BAR ── */
-    #slide-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: rgba(201, 168, 76, .1);
-      z-index: 600;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    #main.on #slide-progress {
-      opacity: 1;
-    }
-
-    #slide-progress .bar {
-      height: 100%;
-      width: 0%;
-      background: var(--gold);
-    }
-
-    /* ── MUSIC ── */
-    #mplayer {
-      position: fixed;
-      top: 30px;
-      left: 30px;
-      z-index: 500;
-      display: none;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .vinyl {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 50%, #1a1208 0%, #1a1208 26%, transparent 26%), conic-gradient(#2a1e0e 0deg, #1a1208 30deg, #2a1e0e 60deg, #1a1208 90deg, #2a1e0e 120deg, #1a1208 150deg, #2a1e0e 180deg, #1a1208 210deg, #2a1e0e 240deg, #1a1208 270deg, #2a1e0e 300deg, #1a1208 330deg, #2a1e0e 360deg);
-      border: 2px solid rgba(201, 168, 76, .3);
-      cursor: none;
-      position: relative;
-      transition: border-color .3s;
-    }
-
-    .vinyl.spin {
-      animation: spin 3s linear infinite;
-    }
-
-    .vinyl::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 12px;
-      height: 12px;
-      background: var(--gold);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(201, 168, 76, .5);
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* ── TYPOGRAPHY & ELEMENTS ── */
-    .ey {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
-      font-size: .65rem;
-      letter-spacing: .5em;
-      text-transform: uppercase;
-      color: rgba(201, 168, 76, .6);
-      display: block;
-      margin-bottom: 20px;
-    }
-
-    .st {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 6vw, 3.6rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--ivory);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-
-    .sb {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      line-height: 1.9;
-      color: rgba(253, 246, 232, .75);
-      font-weight: 300;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .sdiv {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin: 28px auto;
-    }
-
-    .sdiv::before,
-    .sdiv::after {
-      content: '';
-      width: 70px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201, 168, 76, .5));
-    }
-
-    .sdiv::after {
-      background: linear-gradient(to left, transparent, rgba(201, 168, 76, .5));
-    }
-
-    .sdiv span {
-      color: var(--gold);
-      font-size: .7rem;
-    }
-
-    /* Quotes */
-    .q-ar {
-      font-family: 'Amiri', 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      color: var(--gold2);
-      line-height: 1.8;
-      text-align: center;
-      margin-bottom: 24px;
-      direction: rtl;
-    }
-
-    .q-fr {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      color: rgba(253, 246, 232, .75);
-      line-height: 1.9;
-      max-width: 650px;
-      text-align: center;
-      margin: 0 auto;
-    }
-
-    /* ── SLIDES SPECIFICS ── */
-    .hero-names {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(3.2rem, 11vw, 8rem);
-      line-height: 1;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 40%, var(--gold3) 60%, var(--gold) 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: goldShimmer 4s ease-in-out infinite;
-      padding-right: 0.15em;
-    }
-
-    @keyframes goldShimmer {
-
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-
-    .hero-date {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      font-style: italic;
-      color: var(--champagne);
-      letter-spacing: .05em;
-    }
-
-    .hero-lieu {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: clamp(.6rem, 1.5vw, .75rem);
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      color: rgba(201, 168, 76, .7);
-      margin-top: 10px;
-    }
-
-    .hero-orn {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    .hero-orn::before,
-    .hero-orn::after {
-      content: '';
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201, 168, 76, .45));
-    }
-
-    .hero-orn::after {
-      background: linear-gradient(to left, transparent, rgba(201, 168, 76, .45));
-    }
-
-    .orn-dia {
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
-      transform: rotate(45deg);
-      box-shadow: 0 0 10px rgba(201, 168, 76, .6);
-    }
-
-    .icard {
-      max-width: 640px;
-      margin: 0 auto;
-      border: 1px solid rgba(201, 168, 76, .25);
-      padding: clamp(40px, 6vw, 70px) clamp(28px, 5vw, 62px);
-      position: relative;
-      background: rgba(255, 255, 255, .03);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    }
-
-    .icard::before,
-    .icard::after,
-    .icc1,
-    .icc2 {
-      content: '';
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-color: rgba(201, 168, 76, .6);
-      border-style: solid;
-    }
-
-    .icard::before {
-      top: 10px;
-      left: 10px;
-      border-width: 1px 0 0 1px;
-    }
-
-    .icard::after {
-      bottom: 10px;
-      right: 10px;
-      border-width: 0 1px 1px 0;
-    }
-
-    .icc1 {
-      top: 10px;
-      right: 10px;
-      border-width: 1px 1px 0 0;
-    }
-
-    .icc2 {
-      bottom: 10px;
-      left: 10px;
-      border-width: 0 0 1px 1px;
-    }
-
-    .inames {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      background: linear-gradient(135deg, var(--gold), var(--gold2), var(--gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1.1;
-      display: block;
-      padding-right: 0.15em;
-    }
-
-    .ibody {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-      color: rgba(253, 246, 232, .85);
-      line-height: 2;
-      margin: 24px 0;
-    }
-
-    .tl-wrap {
-      max-width: 600px;
-      width: 100%;
-      margin: 40px auto 0;
-      position: relative;
-      text-align: left;
-    }
-
-    .ti {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
-      padding: 20px;
-      border: 1px solid rgba(201, 168, 76, .15);
-      background: rgba(201, 168, 76, .03);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      border-radius: 4px;
-    }
-
-    .tt {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: .65rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      width: 80px;
-      flex-shrink: 0;
-    }
-
-    .tc {
-      border-left: 1px solid rgba(201, 168, 76, .3);
-      padding-left: 20px;
-      margin-left: 10px;
-    }
-
-    .tn {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-      color: var(--ivory);
-      margin-bottom: 4px;
-    }
-
-    .td {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
-      font-size: .7rem;
-      color: rgba(253, 246, 232, .5);
-      line-height: 1.6;
-    }
-
-    .cdg {
-      display: flex;
-      justify-content: center;
-      gap: clamp(16px, 3vw, 32px);
-      margin: 48px 0;
-      flex-wrap: wrap;
-    }
-
-    .cdt {
-      width: clamp(85px, 18vw, 120px);
-      padding: clamp(20px, 3vw, 26px) 12px;
-      border: 1px solid rgba(201, 168, 76, .25);
-      background: rgba(201, 168, 76, .03);
-      text-align: center;
-    }
-
-    .cdn {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 8vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1;
-      color: var(--gold2);
-      display: block;
-    }
-
-    .cdl {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: .55rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      color: rgba(201, 168, 76, .6);
-      margin-top: 12px;
-      display: block;
-    }
-
-    .mbtn {
-      display: inline-block;
-      margin-top: 28px;
-      padding: 14px 44px;
-      border: 1px solid rgba(201, 168, 76, .4);
-      color: var(--gold);
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: .65rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background .3s;
-      cursor: none;
-    }
-
-    .mbtn:hover {
-      background: rgba(201, 168, 76, .1);
-    }
-
-    .rc-wrap {
-      display: flex;
-      justify-content: center;
-      gap: clamp(20px, 4vw, 40px);
-      margin-top: 48px;
-      flex-wrap: wrap;
-    }
-
-    .rc {
-      width: clamp(220px, 40vw, 300px);
-      padding: clamp(40px, 5vw, 52px) clamp(24px, 4vw, 36px);
-      border: 1px solid rgba(201, 168, 76, .25);
-      cursor: none;
-      transition: transform .4s, border-color .4s, background .4s, box-shadow .4s;
-      background: rgba(255, 255, 255, .03);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .rc:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-      background: rgba(201, 168, 76, .08);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    }
-
-    .rct {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.2rem, 3vw, 1.5rem);
-      color: var(--ivory);
-      display: block;
-      margin: 16px 0 10px;
-    }
-
-    .rcs {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
-      font-size: .65rem;
-      letter-spacing: .15em;
-      color: rgba(253, 246, 232, .5);
-      line-height: 1.7;
-    }
-
-    /* ── RSVP MODAL ── */
-    #rover {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1500;
-      background: rgba(26, 21, 18, .95);
-      backdrop-filter: blur(10px);
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    #rover.open {
-      display: flex;
-    }
-
-    .rmod {
-      max-width: 480px;
-      width: 100%;
-      border: 1px solid rgba(201, 168, 76, .3);
-      padding: clamp(36px, 6vw, 58px) clamp(28px, 5vw, 50px);
-      position: relative;
-      background: rgba(56, 44, 38, 0.4);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-      animation: modalIn .5s ease;
-    }
-
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: scale(.95) translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    .rclose {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      background: none;
-      border: none;
-      color: rgba(201, 168, 76, .6);
-      font-size: 1.5rem;
-      cursor: none;
-      transition: color .2s;
-    }
-
-    .rclose:hover {
-      color: var(--gold);
-    }
-
-    .rtitle {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2rem, 7vw, 3rem);
-      color: var(--gold2);
-      display: block;
-      margin-bottom: 28px;
-    }
-
-    .rfield,
-    .rsel {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(201, 168, 76, .3);
-      padding: 12px 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      color: var(--ivory);
-      outline: none;
-      margin-bottom: 24px;
-      display: block;
-      transition: border-color .3s;
-    }
-
-    .rfield::placeholder {
-      color: rgba(253, 246, 232, .3);
-    }
-
-    .rfield:focus,
-    .rsel:focus {
-      border-color: var(--gold);
-    }
-
-    .rsel option {
-      background: var(--mocha);
-    }
-
-    .rsub {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      border: none;
-      color: var(--espresso);
-      font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: .7rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      cursor: none;
-      transition: opacity .3s;
-    }
-
-    .rsub:hover {
-      opacity: .9;
-    }
-
-    #ccanvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1600;
-      display: none;
-    }
-
-    #goodbye {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1700;
-      background: var(--espresso);
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 24px;
-    }
-
-    #goodbye.open {
-      display: flex;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#f5ebe0">
+<title>Imane &amp; Mohamed — 29 Août 2026</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@100;200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/scenes.css">
 </head>
-
 <body>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cring"></div>
-  <div id="yt-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></div>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
 
-  <!-- ══════════════════════════════════
-     INTRO — WAX SEAL
-══════════════════════════════════ -->
-  <div id="intro">
-    <div class="env-wrap">
-      <div class="env-back"></div>
-      <div class="env-front"></div>
-      <div class="env-flap"></div>
-    </div>
-    <div class="seal-wrap" id="swrap" onclick="crackSeal()" style="z-index: 5;">
-      <svg class="seal-svg" viewBox="0 0 136 136" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="sg" cx="38%" cy="32%" r="68%">
-            <stop offset="0%" stop-color="#e8c96e" />
-            <stop offset="50%" stop-color="#c9a84c" />
-            <stop offset="100%" stop-color="#8a6c27" />
-          </radialGradient>
-        </defs>
-        <path
-          d="M68 6 C84 4, 106 14, 118 30 C130 46, 134 70, 126 88 C118 106, 96 128, 76 130 C56 132, 28 120, 16 102 C4 84, 2 56, 12 38 C22 20, 52 8, 68 6Z"
-          fill="url(#sg)" />
-        <circle cx="68" cy="68" r="54" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" />
-        <circle cx="68" cy="68" r="48" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1" />
-        <text x="68" y="58" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="26"
-          fill="rgba(255,255,255,.95)">I</text>
-        <text x="68" y="74" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10"
-          fill="rgba(255,255,255,.7)" font-style="italic" letter-spacing="2">&amp;</text>
-        <text x="68" y="96" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="26"
-          fill="rgba(255,255,255,.95)">M</text>
-      </svg>
-    </div>
-    <p class="seal-hint">Briser le sceau</p>
+<!-- Background layers -->
+<div id="bg-color"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="petal-canvas"></canvas>
+<canvas id="veil-canvas"></canvas>
+<div id="flash"></div>
+
+<!-- Hidden YouTube player -->
+<div id="yt-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></div>
+
+<!-- ═══════════════════════════════════════════
+     RIBBON INTRO SCREEN
+═══════════════════════════════════════════ -->
+<div id="ribbon-screen">
+  <div class="ribbon-frame">
+    <div class="c1"></div>
+    <div class="c2"></div>
   </div>
 
-  <!-- ══════════════════════════════════
-     NAME SCREEN
-══════════════════════════════════ -->
-  <div id="name-screen">
-    <div style="position:absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; filter: blur(20px);"></div>
-    <span class="wn a1">Imane</span>
-    <span class="wet">et</span>
-    <span class="wn a2">Mohamed</span>
-    <div
-      style="width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);margin:30px auto;opacity:0;animation:fuslide 1s 1.5s forwards;">
-    </div>
-    <button class="cbtn" onclick="enterSite()">Découvrir l'invitation &nbsp;→</button>
+  <!-- Envelope graphic -->
+  <div class="envelope-wrap">
+    <svg class="envelope-svg" viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="envGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#e8d8c4"/>
+          <stop offset="100%" stop-color="#d4c0a8"/>
+        </linearGradient>
+        <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#e0ccb4"/>
+          <stop offset="100%" stop-color="#cdb898"/>
+        </linearGradient>
+        <filter id="envShadow">
+          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(93,61,46,0.18)"/>
+        </filter>
+      </defs>
+
+      <!-- Envelope body -->
+      <rect x="10" y="50" width="300" height="150" rx="4"
+        fill="url(#envGrad)" filter="url(#envShadow)"
+        stroke="rgba(184,136,42,0.3)" stroke-width="1"/>
+
+      <!-- Interior (visible when open) -->
+      <rect x="10" y="50" width="300" height="150" rx="4" fill="#fdf6ec"/>
+
+      <!-- Initials on envelope body -->
+      <text x="160" y="148" text-anchor="middle"
+        font-family="'Great Vibes',cursive" font-size="40"
+        fill="rgba(193,103,79,0.55)">I &amp; M</text>
+
+      <!-- Bottom left/right triangles (envelope sides) -->
+      <path d="M10 50 L160 145 L310 50" fill="rgba(0,0,0,0)" stroke="rgba(184,136,42,0.2)" stroke-width="1"/>
+
+      <!-- Bottom triangle -->
+      <path d="M10 200 L160 128 L310 200 Z" fill="#cfc0a0" opacity="0.8"/>
+
+      <!-- Top flap group (animatable) -->
+      <g id="envelope-flap-group" style="transform-origin:160px 50px;transform-box:fill-box;">
+        <path d="M10 50 L160 138 L310 50 Z"
+          fill="url(#flapGrad)"
+          stroke="rgba(184,136,42,0.25)" stroke-width="1"/>
+      </g>
+
+      <!-- Wax seal on flap -->
+      <g id="wax-seal-group">
+        <circle cx="160" cy="98" r="28" fill="#c1674f"
+          filter="url(#envShadow)"/>
+        <circle cx="160" cy="98" r="28"
+          fill="radial-gradient(circle at 40% 35%, rgba(255,200,160,0.3), transparent)"/>
+        <circle cx="160" cy="98" r="24"
+          fill="none" stroke="rgba(255,210,180,0.3)" stroke-width="1"/>
+        <!-- Star in seal -->
+        <polygon points="160,80 163,92 176,92 166,100 169,112 160,104 151,112 154,100 144,92 157,92"
+          fill="none" stroke="rgba(255,230,200,0.35)" stroke-width="0.8"/>
+        <text x="160" y="93" text-anchor="middle"
+          font-family="'Great Vibes',cursive" font-size="13"
+          fill="rgba(255,245,235,0.92)">I</text>
+        <text x="160" y="103" text-anchor="middle"
+          font-family="'Cormorant Garamond',serif" font-size="7"
+          fill="rgba(255,235,210,0.6)" font-style="italic">&amp;</text>
+        <text x="160" y="117" text-anchor="middle"
+          font-family="'Great Vibes',cursive" font-size="13"
+          fill="rgba(255,245,235,0.92)">M</text>
+      </g>
+    </svg>
+
+    <!-- Ribbon on top -->
+    <svg id="ribbon-svg" class="ribbon-svg" viewBox="0 0 120 100"
+      xmlns="http://www.w3.org/2000/svg" style="transform:translateX(-50%);">
+      <defs>
+        <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#b8882a"/>
+          <stop offset="40%"  stop-color="#e8c96e"/>
+          <stop offset="100%" stop-color="#b8882a"/>
+        </linearGradient>
+        <linearGradient id="ribbonGrad2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#c9a84c"/>
+          <stop offset="50%"  stop-color="#f5e4a8"/>
+          <stop offset="100%" stop-color="#c9a84c"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Left bow lobe -->
+      <g id="bow-left" style="transform-origin:60px 42px;transform-box:fill-box;">
+        <ellipse cx="34" cy="36" rx="28" ry="16"
+          fill="url(#ribbonGrad)" opacity="0.9"
+          transform="rotate(-25,60,42)"/>
+        <ellipse cx="34" cy="36" rx="22" ry="10"
+          fill="url(#ribbonGrad2)" opacity="0.5"
+          transform="rotate(-25,60,42)"/>
+      </g>
+
+      <!-- Right bow lobe -->
+      <g id="bow-right" style="transform-origin:60px 42px;transform-box:fill-box;">
+        <ellipse cx="86" cy="36" rx="28" ry="16"
+          fill="url(#ribbonGrad)" opacity="0.9"
+          transform="rotate(25,60,42)"/>
+        <ellipse cx="86" cy="36" rx="22" ry="10"
+          fill="url(#ribbonGrad2)" opacity="0.5"
+          transform="rotate(25,60,42)"/>
+      </g>
+
+      <!-- Ribbon tails -->
+      <path d="M50 50 L40 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M70 50 L80 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round"/>
+      <!-- Tail shine -->
+      <path d="M52 50 L43 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+      <path d="M68 50 L77 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+      <!-- Knot -->
+      <g id="bow-knot" style="transform-origin:60px 44px;transform-box:fill-box;">
+        <ellipse cx="60" cy="44" rx="12" ry="10" fill="url(#ribbonGrad)"/>
+        <ellipse cx="60" cy="44" rx="8"  ry="6"  fill="url(#ribbonGrad2)" opacity="0.6"/>
+      </g>
+    </svg>
   </div>
 
-  <!-- ══════════════════════════════════
-     MAIN SITE (SLIDER)
-══════════════════════════════════ -->
-  <div id="main">
+  <!-- Hint text -->
+  <div class="ribbon-hint" id="ribbon-hint">
+    <p>Tirez le ruban pour ouvrir</p>
+    <div class="ribbon-hint-arrow"></div>
+  </div>
+</div>
 
-    <div id="slide-progress">
-      <div class="bar" id="pbar"></div>
-    </div>
+<!-- ═══════════════════════════════════════════
+     FILM
+═══════════════════════════════════════════ -->
+<div id="film">
 
-    <div id="mplayer" onclick="toggleMusic()">
-      <div class="vinyl" id="vinyl"></div>
-    </div>
-
-    <div id="slide-nav">
-      <div class="nav-dot active" onclick="goToSlide(0)"></div>
-      <div class="nav-dot" onclick="goToSlide(1)"></div>
-      <div class="nav-dot" onclick="goToSlide(2)"></div>
-      <div class="nav-dot" onclick="goToSlide(3)"></div>
-      <div class="nav-dot" onclick="goToSlide(4)"></div>
-      <div class="nav-dot" onclick="goToSlide(5)"></div>
-      <div class="nav-dot" onclick="goToSlide(6)"></div>
-      <div class="nav-dot" onclick="goToSlide(7)"></div>
-      <div class="nav-dot" onclick="goToSlide(8)"></div>
-      <div class="nav-dot" onclick="goToSlide(9)"></div>
-    </div>
-
-    <div id="slider-container">
-
-      <!-- SLIDE 1: INITIALS I&M -->
-      <div class="slide active">
-        <span class="hero-names" style="font-size: clamp(6rem, 20vw, 12rem);">I &amp; M</span>
-      </div>
-
-      <!-- SLIDE 2: BISMILLAH -->
-      <div class="slide">
-        <div class="sdiv"><span>✦</span></div>
-        <p class="q-ar" style="color: var(--terracotta);">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
-        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
-      </div>
-
-      <!-- SLIDE 3: SURAH -->
-      <div class="slide">
-        <div class="sdiv"><span>✦</span></div>
-        <p class="q-ar" style="font-size: clamp(1.4rem, 4vw, 2.2rem);">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-        <p class="q-fr" style="color: var(--terracotta); font-weight: 600; margin-top: 20px; letter-spacing: 0.1em; font-family: 'Raleway', sans-serif; text-transform: uppercase; font-size: 0.8rem;">سورة الروم - الآية 21</p>
-        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
-      </div>
-
-      <!-- SLIDE 4: FAMILIES -->
-      <div class="slide">
-        <span class="ey">Faire-part</span>
-        <h2 class="st" style="font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 30px;">Famille CHARAF<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.6em;color:var(--gold);display:block;margin:10px 0;">&amp;</span>Famille BENNANI</h2>
-        <p class="sb">ont l'immense joie de vous annoncer<br>le mariage de leurs enfants</p>
-      </div>
-
-      <!-- SLIDE 5: NAMES & STORY -->
-      <div class="slide">
-        <div class="sdiv"><span>✦</span></div>
-        <span class="inames" style="font-size: clamp(3.5rem, 9vw, 6rem); margin-bottom: 20px;">Imane<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.5em;color:var(--gold);display:block;margin:5px 0;">&amp;</span>Mohamed</span>
-        <p class="q-fr" style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-top: 20px;">Une histoire écrite à deux, une nouvelle page qui commence...</p>
-        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
-      </div>
-
-      <!-- SLIDE 6: SAVE THE DATE -->
-      <div class="slide">
-        <span class="ey">Save The Date</span>
-        <h2 class="st">Samedi 29 Août 2026</h2>
-        <p class="sb" style="margin-bottom: 30px;">Un jour de bonheur que nous serions honorés<br>de partager avec vous.</p>
-        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+et+Mohamed&dates=20260829T160000Z/20260829T230000Z&details=C%C3%A9l%C3%A9bration+de+notre+mariage&location=Dar+El+Ghalia,+Bouskoura" target="_blank" class="mbtn">Ajouter au calendrier</a>
-      </div>
-
-      <!-- SLIDE 7: VENUE -->
-      <div class="slide" style="background-image: linear-gradient(rgba(26,21,18,0.75), rgba(26,21,18,0.85)), url('fond-dar-el-ghalia.jpg'); background-size: cover; background-position: center;">
-        <span class="ey">Le Lieu</span>
-        <h2 class="st">Dar El Ghalia</h2>
-        <p class="sb" style="margin-bottom: 20px; font-size: 1.2rem;">📍 Bouskoura</p>
-        <a href="https://www.waze.com/fr/live-map/directions/ma/casablanca-settat/bouskoura/dar-el-ghalia?utm_campaign=default&utm_medium=lm_share_location&utm_source=waze_website&to=place.ChIJe6ljfV8ppg0RXXsKLbuqVVc" target="_blank" class="mbtn">Y aller avec Waze</a>
-      </div>
-
-      <!-- SLIDE 8: COUNTDOWN -->
-      <div class="slide">
-        <h2 class="st" style="margin-bottom: 10px;">Le grand jour approche</h2>
-        <div class="sdiv"><span>✦</span></div>
-        <div class="cdg">
-          <div class="cdt"><span class="cdn" id="cdd">000</span><span class="cdl">Jours</span></div>
-          <div class="cdt"><span class="cdn" id="cdh">00</span><span class="cdl">Heures</span></div>
-          <div class="cdt"><span class="cdn" id="cdm">00</span><span class="cdl">Minutes</span></div>
-          <div class="cdt"><span class="cdn" id="cds">00</span><span class="cdl">Secondes</span></div>
-        </div>
-      </div>
-
-      <!-- SLIDE 9: IMPORTANT -->
-      <div class="slide">
-        <span class="ey">Important à noter</span>
-        <div class="sdiv"><span>✦</span></div>
-        <div class="tl-wrap" style="margin-top: 20px;">
-          <div class="ti">
-            <span class="tt">17h00</span>
-            <div class="tc">
-              <div class="tn">Accueil des invités</div>
-            </div>
-          </div>
-          <div class="ti" style="border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);">
-            <span class="tt" style="color:var(--gold2);">19h30</span>
-            <div class="tc">
-              <div class="tn" style="color:var(--gold2);">Entrée de la mariée</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 10: MERCI & RSVP -->
-      <div class="slide">
-        <span class="ey">Répondre avant le 1er Juillet 2026</span>
-        <h2 class="st" style="font-size: clamp(3rem, 8vw, 5rem); font-family: 'Great Vibes', cursive; color: var(--gold2); margin-bottom: 10px;">Merci</h2>
-        <p class="sb">Au plaisir de vous compter parmi nous.</p>
-        <div class="rc-wrap">
-          <div class="rc" onclick="openRSVP('yes')">
-            <span style="font-size:2.5rem;display:block;">💌</span>
-            <span class="rct">J'accepte avec joie</span>
-            <span class="rcs">Confirmer ma présence</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="slide-controls">
-      <button class="ctrl-btn" id="btn-prev" onclick="prevSlide()" disabled>← Précédent</button>
-      <button class="ctrl-btn" id="btn-next" onclick="nextSlide()">Suivant →</button>
-    </div>
-
+  <!-- Music player -->
+  <div id="mplayer" onclick="Music.toggle()" style="display:none;">
+    <div class="vinyl" id="vinyl"></div>
+    <span class="mlabel" id="mlabel">Musique</span>
   </div>
 
-  <!-- RSVP MODAL -->
-  <div id="rover">
-    <div class="rmod">
-      <button class="rclose" onclick="closeRSVP()">✕</button>
-      <span class="rtitle" id="rtitle">Avec joie ✦</span>
-      <input class="rfield" type="text" placeholder="Votre prénom et nom" id="rname">
-      <input class="rfield" type="email" placeholder="Votre adresse email" id="remail">
-      <select class="rsel" id="rguests">
-        <option value="" disabled selected>Nombre de personnes</option>
-        <option>1 personne</option>
-        <option>2 personnes</option>
-        <option>3 personnes</option>
-        <option>4 personnes ou plus</option>
-      </select>
-      <button class="rsub" onclick="submitRSVP()">Confirmer ma réponse</button>
+  <!-- Progress dots -->
+  <div id="progress-dots"></div>
+
+  <!-- ── SCENE 1: I & M ── -->
+  <div class="scene light-bg" id="scene-1">
+    <div class="initials-wrap">
+      <span class="initials-i">I</span>
+      <span class="initials-amp">&amp;</span>
+      <span class="initials-m">M</span>
+      <p class="initials-date">29 Août 2026 · Dar El Ghalia</p>
     </div>
   </div>
-  <canvas id="ccanvas"></canvas>
-  <div id="goodbye">
-    <span style="font-family:'Great Vibes',cursive;font-size:4rem;color:var(--gold2);">Merci</span>
-    <p style="font-size:1.2rem;color:rgba(255,255,255,.6);margin-top:20px;line-height:1.8;">Nous vous souhaitons une
-      belle journée,<br>et espérons vous croiser un jour ✦</p>
+
+  <!-- ── SCENE 2: Bismillah ── -->
+  <div class="scene light-bg" id="scene-2">
+    <div class="scene-ornament"><span>✦</span></div>
+    <p class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="bismillah-sub">Au nom de Dieu, le Tout Miséricordieux, le Très Miséricordieux</p>
+    <div class="scene-ornament" style="margin-top:20px;"><span>✦</span></div>
   </div>
 
-  <script>
-    /* ── CURSOR ── */
-    const cur = document.getElementById('cursor'), cring = document.getElementById('cring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
-    (function ar() { 
-      rx += (mx - rx) * .12; ry += (my - ry) * .12; 
-      cring.style.left = rx + 'px'; cring.style.top = ry + 'px'; 
-      let px = (rx / window.innerWidth - 0.5) * -30;
-      let py = (ry / window.innerHeight - 0.5) * -30;
-      document.documentElement.style.setProperty('--px', `${px}px`);
-      document.documentElement.style.setProperty('--py', `${py}px`);
-      requestAnimationFrame(ar); 
-    })();
-    document.querySelectorAll('button,a,.rc,.seal-wrap,.vinyl,.mbtn,.nav-dot').forEach(el => {
-      el.addEventListener('mouseenter', () => { cur.style.width = '14px'; cur.style.height = '14px'; cring.style.width = '50px'; cring.style.height = '50px'; cring.style.borderColor = 'rgba(201,168,76,.7)'; });
-      el.addEventListener('mouseleave', () => { cur.style.width = '8px'; cur.style.height = '8px'; cring.style.width = '32px'; cring.style.height = '32px'; cring.style.borderColor = 'rgba(201,168,76,.4)'; });
+  <!-- ── SCENE 3: Verset Ar-Rum 21 ── -->
+  <div class="scene light-bg" id="scene-3">
+    <p class="verse-source-top">Sourate Ar-Rûm · Verset 21</p>
+    <div class="scene-ornament"><span>✦</span></div>
+    <p class="verse-arabic" id="quran-ar">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+    <p class="verse-french">« Et parmi Ses signes, Il a créé pour vous des épouses issues de vous-mêmes pour que vous viviez en tranquillité auprès d'elles, et Il a mis entre vous de l'amour et de la miséricorde. »</p>
+    <p class="verse-source">Sourate Ar-Rûm · Verset 21</p>
+  </div>
+
+  <!-- ── SCENE 4: Les Familles ── -->
+  <div class="scene light-bg" id="scene-4">
+    <p class="families-pre">Avec toute leur joie</p>
+    <div class="scene-ornament"><span>✦</span></div>
+    <p class="families-les">Les familles</p>
+    <p class="families-names">Charaf</p>
+    <p class="families-amp">&amp;</p>
+    <p class="families-names">Bennani</p>
+    <p class="families-sub">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
+  </div>
+
+  <!-- ── SCENE 5: Imane & Mohamed ── -->
+  <div class="scene light-bg" id="scene-5">
+    <p class="couple-pre">Deux âmes, une histoire</p>
+    <div id="name-svg-wrap">
+      <p class="couple-names-text">
+        Imane Charaf
+        <span class="et">et</span>
+        Mohamed Bennani
+      </p>
+    </div>
+    <div class="couple-ornament"><div class="orn-dia"></div></div>
+    <p class="couple-phrase">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils s'unissent pour l'éternité. »</p>
+  </div>
+
+  <!-- ── SCENE 6: Save the Date ── -->
+  <div class="scene light-bg" id="scene-6">
+    <p class="std-eyebrow">À retenir</p>
+    <p class="std-save">Save the Date</p>
+    <div class="scene-ornament"><span>✦</span></div>
+    <div class="std-date">
+      <span class="day">Samedi</span>
+      <span class="month">29 Août</span>
+      <span class="year">2026</span>
+    </div>
+    <div class="std-divider"></div>
+    <p class="std-phrase">Un jour de bonheur que nous serions<br>honorés de partager avec vous.</p>
+    <a class="std-cal"
+      href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+%26+Mohamed&dates=20260829T150000Z%2F20260830T000000Z&details=Dar+El+Ghalia%2C+Bouskoura&location=Dar+El+Ghalia%2C+Bouskoura"
+      target="_blank" rel="noopener">
+      📅 &nbsp;Ajouter au calendrier
+    </a>
+  </div>
+
+  <!-- ── SCENE 7: Dar El Ghalia ── -->
+  <div class="scene light-bg" id="scene-7">
+    <p class="venue-eyebrow">Le Lieu</p>
+    <p class="venue-name">Dar El Ghalia</p>
+    <p class="venue-addr">📍 Bouskoura, Casablanca-Settat · Maroc</p>
+
+    <!-- Palace silhouette -->
+    <svg class="venue-palace" id="venue-palace" viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <defs>
+        <linearGradient id="vg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#c1674f"/>
+          <stop offset="100%" stop-color="rgba(193,103,79,.3)"/>
+        </linearGradient>
+      </defs>
+      <line x1="0"   y1="200" x2="480" y2="200" stroke="url(#vg)" stroke-width="1"/>
+      <rect x="100"  y="118"  width="280" height="82" fill="rgba(193,103,79,.06)" stroke="url(#vg)" stroke-width="1"/>
+      <rect x="34"   y="148"  width="76"  height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
+      <rect x="370"  y="148"  width="76"  height="52" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
+      <path d="M208 200 L208 158 Q240 132 272 158 L272 200Z" fill="rgba(193,103,79,.09)" stroke="url(#vg)" stroke-width="1"/>
+      <path d="M136 200 L136 166 Q152 150 168 166 L168 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width=".7"/>
+      <path d="M312 200 L312 166 Q328 150 344 166 L344 200Z" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width=".7"/>
+      <rect x="200"  y="56"   width="80"  height="66" fill="rgba(193,103,79,.05)" stroke="url(#vg)" stroke-width="1"/>
+      <path d="M200 56 Q240 14 280 56Z"                     fill="rgba(193,103,79,.09)" stroke="url(#vg)" stroke-width="1"/>
+      <path d="M236 18 Q240 10 244 18 Q240 14 236 18Z"      fill="none" stroke="#c1674f" stroke-width="1.4"/>
+      <circle cx="244" cy="9" r="4.5" fill="none" stroke="#c1674f" stroke-width="1"/>
+      <rect x="90"   y="86"   width="40"  height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
+      <path d="M90 86 Q110 66 130 86Z"                      fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8"/>
+      <rect x="350"  y="86"   width="40"  height="66" fill="rgba(193,103,79,.04)" stroke="url(#vg)" stroke-width=".8"/>
+      <path d="M350 86 Q370 66 390 86Z"                     fill="rgba(193,103,79,.07)" stroke="url(#vg)" stroke-width=".8"/>
+      <g stroke="url(#vg)" stroke-width=".6" fill="rgba(193,103,79,.05)">
+        <path d="M130 116 L130 103 Q138 96 146 103 L146 116Z"/>
+        <path d="M158 116 L158 103 Q166 96 174 103 L174 116Z"/>
+        <path d="M306 116 L306 103 Q314 96 322 103 L322 116Z"/>
+        <path d="M334 116 L334 103 Q342 96 350 103 L350 116Z"/>
+        <path d="M218 102 L218 84 Q240 74 262 84 L262 102Z"/>
+      </g>
+      <g fill="rgba(193,103,79,.14)" stroke="url(#vg)" stroke-width=".4">
+        <rect x="102" y="110" width="8" height="9"/>
+        <rect x="114" y="110" width="8" height="9"/>
+        <rect x="126" y="110" width="8" height="9"/>
+        <rect x="202" y="48"  width="7" height="9"/>
+        <rect x="213" y="48"  width="7" height="9"/>
+        <rect x="224" y="48"  width="7" height="9"/>
+        <rect x="235" y="48"  width="7" height="9"/>
+        <rect x="246" y="48"  width="7" height="9"/>
+        <rect x="257" y="48"  width="7" height="9"/>
+        <rect x="268" y="48"  width="7" height="9"/>
+        <rect x="344" y="110" width="8" height="9"/>
+        <rect x="356" y="110" width="8" height="9"/>
+        <rect x="368" y="110" width="8" height="9"/>
+      </g>
+    </svg>
+
+    <a class="venue-waze"
+      href="https://www.waze.com/fr/live-map/directions/ma/casablanca-settat/bouskoura/dar-el-ghalia?utm_campaign=default&utm_medium=lm_share_location&utm_source=waze_website&to=place.ChIJe6ljfV8ppg0RXXsKLbuqVVc"
+      target="_blank" rel="noopener">
+      🗺️ &nbsp;Itinéraire Waze
+    </a>
+  </div>
+
+  <!-- ── SCENE 8: Compte à rebours ── -->
+  <div class="scene light-bg" id="scene-8">
+    <p class="cd-eyebrow">Le grand jour approche</p>
+    <h2 class="cd-title">Compte à rebours</h2>
+    <div class="cd-grid">
+      <div class="cd-tile"><span class="cd-num" id="cdd">000</span><span class="cd-lbl">Jours</span></div>
+      <div class="cd-tile"><span class="cd-num" id="cdh">00</span><span class="cd-lbl">Heures</span></div>
+      <div class="cd-tile"><span class="cd-num" id="cdm">00</span><span class="cd-lbl">Minutes</span></div>
+      <div class="cd-tile"><span class="cd-num" id="cds">00</span><span class="cd-lbl">Secondes</span></div>
+    </div>
+    <p class="cd-info">Samedi 29 Août 2026 · Dar El Ghalia · 17h00</p>
+  </div>
+
+  <!-- ── SCENE 9: Programme ── -->
+  <div class="scene light-bg" id="scene-9">
+    <p class="prog-eyebrow">Le Programme</p>
+    <h2 class="prog-title">Le déroulé de la soirée</h2>
+    <div class="prog-list">
+      <div class="prog-item">
+        <span class="prog-time">17h00</span>
+        <div class="prog-sep"></div>
+        <span class="prog-name">Accueil des invités</span>
+      </div>
+      <div class="prog-item">
+        <span class="prog-time">18h30</span>
+        <div class="prog-sep"></div>
+        <span class="prog-name">Dîner de Gala</span>
+      </div>
+      <div class="prog-item star">
+        <span class="prog-time">19h30</span>
+        <div class="prog-sep"></div>
+        <span class="prog-name">✦ Entrée de la Mariée</span>
+      </div>
+      <div class="prog-item">
+        <span class="prog-time">21h00</span>
+        <div class="prog-sep"></div>
+        <span class="prog-name">Première Danse &amp; Fête</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCENE 10: Merci ── -->
+  <div class="scene light-bg" id="scene-10">
+    <p class="merci-big">Merci</p>
+    <div class="merci-divider"><div class="merci-divider-gem"></div></div>
+    <p class="merci-sub">Au plaisir de vous compter parmi nous.</p>
+    <p class="merci-recap">
+      29 Août 2026 · Dar El Ghalia · Bouskoura<br>
+      Accueil dès 17h · Entrée de la mariée à 19h30
+    </p>
+    <button class="merci-replay" onclick="Film.replay()">
+      ↺ &nbsp;Revoir l'invitation
+    </button>
+  </div>
+
+</div><!-- /film -->
+
+<!-- Scripts -->
+<script src="js/particles.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+  // Boot sequence
+  window.addEventListener('DOMContentLoaded', () => {
+    Particles.initPetals();
+    Particles.initDust();
+
+    // Start ribbon interaction
+    Intro.init(() => {
+      // Ribbon pulled — film starts
+      Film.start();
     });
+  });
+</script>
 
-    /* ── INTRO ── */
-    function crackSeal() {
-      const w = document.getElementById('swrap');
-      w.classList.add('cracking'); w.onclick = null;
-      document.getElementById('intro').classList.add('cracking');
-      const wr = w.getBoundingClientRect();
-      for (let i = 0; i < 15; i++) {
-        const sp = document.createElement('div'); sp.className = 'spark';
-        const a = (i / 15) * Math.PI * 2, d = 40 + Math.random() * 50;
-        sp.style.cssText = `left:${wr.left + wr.width / 2}px;top:${wr.top + wr.height / 2}px;--tx:${Math.cos(a) * d}px;--ty:${Math.sin(a) * d}px;animation-delay:${Math.random() * .1}s;`;
-        document.body.appendChild(sp);
-        setTimeout(() => sp.remove(), 1000);
-      }
-      setTimeout(() => {
-        document.getElementById('intro').classList.add('out');
-        document.getElementById('name-screen').classList.add('active');
-      }, 1200);
-    }
-
-    function initDust() {
-      const canvas = document.createElement('canvas');
-      canvas.id = 'dust-canvas';
-      canvas.style.cssText = 'position:fixed; inset:0; pointer-events:none; z-index:1; opacity: 0; transition: opacity 2s;';
-      document.getElementById('main').prepend(canvas);
-      setTimeout(() => canvas.style.opacity = '1', 1000);
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-      window.addEventListener('resize', resize); resize();
-      for(let i=0; i<60; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+0.5, vx: (Math.random()-0.5)*0.2, vy: -Math.random()*0.3 - 0.1 });
-      function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.y < -10) p.y = canvas.height + 10;
-          if (p.x < -10) p.x = canvas.width + 10;
-          if (p.x > canvas.width + 10) p.x = -10;
-          ctx.fillStyle = `rgba(201,168,76,${Math.random()*0.4 + 0.1})`;
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
-        });
-        requestAnimationFrame(animate);
-      }
-      animate();
-    }
-
-    function enterSite() {
-      document.getElementById('name-screen').classList.add('out');
-      initDust();
-      setTimeout(() => {
-        document.getElementById('main').classList.add('on');
-        document.getElementById('mplayer').style.display = 'flex';
-        initCountdown();
-        startAutoPlay();
-      }, 800);
-    }
-
-    /* ── SLIDER LOGIC & AUTOPLAY ── */
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.nav-dot');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const pbar = document.getElementById('pbar');
-    let currentSlide = 0;
-    let isAnimating = false;
-    let autoPlayTimer = null;
-    const SLIDE_DURATION = 4500; // Faster transition between pages
-    let autoPlayActive = false;
-
-    function updateNav() {
-      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
-      btnPrev.disabled = currentSlide === 0;
-      btnNext.disabled = currentSlide === slides.length - 1;
-    }
-
-    function goToSlide(index, isAuto = false) {
-      if (index === currentSlide || isAnimating || index < 0 || index >= slides.length) return;
-      isAnimating = true;
-
-      // Start music automatically starting from Page 4 (Families, index 3)
-      if (index >= 3 && ytp && typeof ytp.playVideo === 'function' && !playing) {
-        ytp.playVideo();
-      }
-
-      slides.forEach(s => { s.classList.remove('active', 'prev'); });
-      for (let i = 0; i < index; i++) slides[i].classList.add('prev');
-
-      slides[index].classList.add('active');
-      currentSlide = index;
-      updateNav();
-
-      // Restart bar if auto-playing (even if manual click, do not stop autoplay)
-      if (autoPlayActive) {
-        if (currentSlide === slides.length - 1) {
-          stopAutoPlay(); // stop at last slide (RSVP)
-        } else {
-          resetProgressBar();
-        }
-      }
-
-      setTimeout(() => isAnimating = false, 1100);
-    }
-
-    function nextSlide(isAuto = false) { goToSlide(currentSlide + 1, isAuto); }
-    function prevSlide() { goToSlide(currentSlide - 1); }
-
-    function startAutoPlay() {
-      autoPlayActive = true;
-      resetProgressBar();
-    }
-
-    function stopAutoPlay() {
-      autoPlayActive = false;
-      clearInterval(autoPlayTimer);
-      pbar.style.transition = 'none';
-      pbar.style.width = '0%';
-    }
-
-    function resetProgressBar() {
-      clearInterval(autoPlayTimer);
-      pbar.style.transition = 'none';
-      pbar.style.width = '0%';
-      setTimeout(() => {
-        pbar.style.transition = `width ${SLIDE_DURATION}ms linear`;
-        pbar.style.width = '100%';
-        autoPlayTimer = setTimeout(() => {
-          nextSlide(true);
-        }, SLIDE_DURATION);
-      }, 50);
-    }
-
-    // Interruption events
-    window.addEventListener('wheel', e => {
-      if (!document.getElementById('main').classList.contains('on') || document.getElementById('rover').classList.contains('open')) return;
-      if (e.deltaY > 50) prevSlide(); // Wait, scrolling down (positive) usually goes next. Wait, wheel down = scroll down = next slide. Let's fix this logic just in case:
-      if (e.deltaY > 50) nextSlide();
-      else if (e.deltaY < -50) prevSlide();
-    });
-
-    let touchStartY = 0;
-    window.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
-    window.addEventListener('touchend', e => {
-      if (!document.getElementById('main').classList.contains('on') || document.getElementById('rover').classList.contains('open')) return;
-      const diff = touchStartY - e.changedTouches[0].clientY;
-      if (diff > 50) nextSlide();
-      else if (diff < -50) prevSlide();
-    });
-
-    /* ── COUNTDOWN ── */
-    function initCountdown() {
-      const target = new Date('2026-08-29T17:00:00');
-      function tick() {
-        const diff = target - new Date();
-        if (diff <= 0) { ['cdd', 'cdh', 'cdm', 'cds'].forEach(id => document.getElementById(id).textContent = '00'); return; }
-        document.getElementById('cdd').textContent = String(Math.floor(diff / 86400000)).padStart(3, '0');
-        document.getElementById('cdh').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-        document.getElementById('cdm').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        document.getElementById('cds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-      }
-      tick(); setInterval(tick, 1000);
-    }
-
-    /* ── MUSIC ── */
-    let ytp = null, playing = false;
-    const ytTag = document.createElement('script'); ytTag.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(ytTag);
-    window.onYouTubeIframeAPIReady = function () {
-      ytp = new YT.Player('yt-player', {
-        videoId: 'Jj5QIPnTMZE',
-        playerVars: { autoplay: 0, controls: 0, loop: 0, end: 51 },
-        events: {
-          onStateChange: e => {
-            playing = e.data === YT.PlayerState.PLAYING;
-            document.getElementById('vinyl').classList.toggle('spin', playing);
-          }
-        }
-      });
-    };
-    function toggleMusic() { if (!ytp) return; playing ? ytp.pauseVideo() : ytp.playVideo(); }
-
-    /* ── RSVP ── */
-    let rtype = 'yes';
-    function openRSVP(t) {
-      stopAutoPlay();
-      rtype = t;
-      document.getElementById('rtitle').textContent = t === 'yes' ? 'Avec joie ✦' : 'Je transmets mes vœux';
-      document.getElementById('rover').classList.add('open');
-    }
-    function closeRSVP() { document.getElementById('rover').classList.remove('open'); }
-    function submitRSVP() {
-      if (!document.getElementById('rname').value.trim()) { document.getElementById('rname').focus(); return; }
-      closeRSVP();
-      if (rtype === 'yes') launchConfetti();
-      else document.getElementById('goodbye').classList.add('open');
-    }
-    document.getElementById('rover').addEventListener('click', function (e) { if (e.target === this) closeRSVP(); });
-
-    /* ── CONFETTI ── */
-    function launchConfetti() {
-      const cv = document.getElementById('ccanvas');
-      cv.style.display = 'block'; cv.width = window.innerWidth; cv.height = window.innerHeight;
-      const ctx = cv.getContext('2d');
-      const cols = ['#c9a84c', '#e8c96e', '#f5e4a8', '#fdf6e8'];
-      const ps = Array.from({ length: 100 }, () => ({
-        x: Math.random() * cv.width, y: -20, r: Math.random() * 5 + 3,
-        d: Math.random() * 4 + 2, color: cols[Math.floor(Math.random() * cols.length)],
-        tilt: Math.random() * 10 - 5, ta: 0, ts: Math.random() * .07 + .05
-      }));
-      let f = 0;
-      function draw() {
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ps.forEach(p => {
-          ctx.fillStyle = p.color; ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          p.y += p.d; p.x += Math.sin(f * .02 + p.tilt) * 1.5; p.ta += p.ts;
-        });
-        f++; if (f < 250) requestAnimationFrame(draw);
-        else { cv.style.display = 'none'; ctx.clearRect(0, 0, cv.width, cv.height); }
-      }
-      draw();
-    }
-  </script>
 </body>
-
 </html>
