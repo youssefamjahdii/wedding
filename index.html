@@ -27,6 +27,7 @@
       --gold3: #f5e4a8;
       --blush: #e3cbc3;
       --text: #2a1c0c;
+      --terracotta: #cc5b43;
     }
 
     html,
@@ -107,6 +108,12 @@
       visibility: hidden;
       pointer-events: none;
     }
+
+    .env-wrap { position: absolute; width: 100%; max-width: 600px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+    .env-back { position: absolute; inset: 0; background: var(--mocha); border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .env-flap { position: absolute; top: 0; left: 0; width: 100%; height: 60%; background: var(--mocha); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); border-bottom: 1px solid rgba(201,168,76,0.3); z-index: 2; }
+    .env-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; clip-path: polygon(0 100%, 50% 40%, 100% 100%, 100% 100%, 0 100%); background: var(--espresso); border-top: 1px solid rgba(201,168,76,0.2); z-index: 3; }
+    #intro.cracking .env-flap { transform: rotateX(180deg); }
 
     .seal-wrap {
       position: relative;
@@ -345,7 +352,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), filter 1.5s ease;
+      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1), filter 1s ease;
       transform: scale(0.95);
       filter: blur(8px);
       padding: 40px 24px;
@@ -368,6 +375,27 @@
       opacity: 0;
       visibility: hidden;
     }
+
+    .slide > * {
+      opacity: 0;
+      transform: translateY(20px) translate(var(--px, 0px), var(--py, 0px));
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .slide.active > * {
+      opacity: 1;
+      transform: translateY(0) translate(var(--px, 0px), var(--py, 0px));
+    }
+    .slide.active > *:nth-child(1) { transition-delay: 0.1s; }
+    .slide.active > *:nth-child(2) { transition-delay: 0.3s; }
+    .slide.active > *:nth-child(3) { transition-delay: 0.5s; }
+    .slide.active > *:nth-child(4) { transition-delay: 0.7s; }
+    .slide.active > *:nth-child(5) { transition-delay: 0.9s; }
+    .slide.active > *:nth-child(6) { transition-delay: 1.1s; }
+    .slide.active > *:nth-child(7) { transition-delay: 1.3s; }
+    .slide.active > *:nth-child(8) { transition-delay: 1.5s; }
+    .slide.active > *:nth-child(9) { transition-delay: 1.7s; }
+    .slide.active > *:nth-child(10) { transition-delay: 1.9s; }
+    .slide.active > *:nth-child(11) { transition-delay: 2.1s; }
 
     /* Navigation Dots */
     #slide-nav {
@@ -664,8 +692,9 @@
       border: 1px solid rgba(201, 168, 76, .25);
       padding: clamp(40px, 6vw, 70px) clamp(28px, 5vw, 62px);
       position: relative;
-      background: rgba(255, 255, 255, .015);
-      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, .03);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     }
 
     .icard::before,
@@ -739,7 +768,9 @@
       margin-bottom: 24px;
       padding: 20px;
       border: 1px solid rgba(201, 168, 76, .15);
-      background: rgba(201, 168, 76, .02);
+      background: rgba(201, 168, 76, .03);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       border-radius: 4px;
     }
 
@@ -845,14 +876,17 @@
       padding: clamp(40px, 5vw, 52px) clamp(24px, 4vw, 36px);
       border: 1px solid rgba(201, 168, 76, .25);
       cursor: none;
-      transition: transform .4s, border-color .4s, background .4s;
-      background: rgba(255, 255, 255, .01);
+      transition: transform .4s, border-color .4s, background .4s, box-shadow .4s;
+      background: rgba(255, 255, 255, .03);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
 
     .rc:hover {
       transform: translateY(-6px);
       border-color: var(--gold);
-      background: rgba(201, 168, 76, .05);
+      background: rgba(201, 168, 76, .08);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     }
 
     .rct {
@@ -896,7 +930,9 @@
       border: 1px solid rgba(201, 168, 76, .3);
       padding: clamp(36px, 6vw, 58px) clamp(28px, 5vw, 50px);
       position: relative;
-      background: var(--mocha);
+      background: rgba(56, 44, 38, 0.4);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
       animation: modalIn .5s ease;
     }
 
@@ -1021,7 +1057,12 @@
      INTRO — WAX SEAL
 ══════════════════════════════════ -->
   <div id="intro">
-    <div class="seal-wrap" id="swrap" onclick="crackSeal()">
+    <div class="env-wrap">
+      <div class="env-back"></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+    </div>
+    <div class="seal-wrap" id="swrap" onclick="crackSeal()" style="z-index: 5;">
       <svg class="seal-svg" viewBox="0 0 136 136" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="sg" cx="38%" cy="32%" r="68%">
@@ -1040,7 +1081,7 @@
         <text x="68" y="74" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10"
           fill="rgba(255,255,255,.7)" font-style="italic" letter-spacing="2">&amp;</text>
         <text x="68" y="96" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="26"
-          fill="rgba(255,255,255,.95)">S</text>
+          fill="rgba(255,255,255,.95)">M</text>
       </svg>
     </div>
     <p class="seal-hint">Briser le sceau</p>
@@ -1051,9 +1092,9 @@
 ══════════════════════════════════ -->
   <div id="name-screen">
     <div style="position:absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; filter: blur(20px);"></div>
-    <span class="wn a1">Imane Charaf</span>
+    <span class="wn a1">Imane</span>
     <span class="wet">et</span>
-    <span class="wn a2">SiMohamed Bennani</span>
+    <span class="wn a2">Mohamed</span>
     <div
       style="width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);margin:30px auto;opacity:0;animation:fuslide 1s 1.5s forwards;">
     </div>
@@ -1083,132 +1124,104 @@
       <div class="nav-dot" onclick="goToSlide(6)"></div>
       <div class="nav-dot" onclick="goToSlide(7)"></div>
       <div class="nav-dot" onclick="goToSlide(8)"></div>
+      <div class="nav-dot" onclick="goToSlide(9)"></div>
     </div>
 
     <div id="slider-container">
 
-      <!-- SLIDE 1: DIVINE DECREE -->
+      <!-- SLIDE 1: INITIALS I&M -->
       <div class="slide active">
+        <span class="hero-names" style="font-size: clamp(6rem, 20vw, 12rem);">I &amp; M</span>
+      </div>
+
+      <!-- SLIDE 2: BISMILLAH -->
+      <div class="slide">
         <div class="sdiv"><span>✦</span></div>
-        <p class="q-ar">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا
-          إِلَيْهَا<br>وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-        <p class="q-fr">« Et parmi Ses signes, Il a créé pour vous des épouses issues de vous-mêmes pour que vous viviez
-          en tranquillité auprès d'elles, et Il a mis entre vous de l'amour et de la miséricorde. »</p>
+        <p class="q-ar" style="color: var(--terracotta);">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
         <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
       </div>
 
-      <!-- SLIDE 2: HERO -->
-      <div class="slide">
-        <span class="ey">Avec tout notre amour</span>
-        <span class="hero-names">Imane &amp; SiMohamed</span>
-        <span class="hero-date">Samedi 29 Août 2026</span>
-        <div class="hero-orn">
-          <div class="orn-dia"></div>
-        </div>
-        <span class="hero-lieu">Dar El Ghalia &nbsp;·&nbsp; À partir de 17h00</span>
-      </div>
-
-      <!-- SLIDE 3: NEW LOVE QUOTE -->
+      <!-- SLIDE 3: SURAH -->
       <div class="slide">
         <div class="sdiv"><span>✦</span></div>
-        <p class="q-fr" style="font-size:clamp(1.4rem, 3.5vw, 2rem); line-height: 1.6;">« Il n'y a pas de plus belle aventure que celle que l'on partage avec la personne que l'on aime. »</p>
+        <p class="q-ar" style="font-size: clamp(1.4rem, 4vw, 2.2rem);">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+        <p class="q-fr" style="color: var(--terracotta); font-weight: 600; margin-top: 20px; letter-spacing: 0.1em; font-family: 'Raleway', sans-serif; text-transform: uppercase; font-size: 0.8rem;">سورة الروم - الآية 21</p>
         <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
       </div>
 
-      <!-- SLIDE 4: LOVE QUOTE -->
-      <div class="slide">
-        <div class="sdiv"><span>✦</span></div>
-        <p class="st" style="margin-bottom:24px;font-size:clamp(1.5rem,4vw,2.5rem);">L'Éternité à deux</p>
-        <p class="q-fr">« Nos chemins se sont croisés, nos âmes se sont reconnues,<br>et notre histoire s'écrira
-          désormais à deux pour l'éternité. »</p>
-        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
-      </div>
-
-      <!-- SLIDE 4: INVITATION -->
+      <!-- SLIDE 4: FAMILIES -->
       <div class="slide">
         <span class="ey">Faire-part</span>
-        <h2 class="st">Nous avons l'honneur<br>de vous inviter</h2>
-        <div class="sdiv"><span>✦</span></div>
-        <div class="icard">
-          <div class="icc1"></div>
-          <div class="icc2"></div>
-          <span class="inames">Imane Charaf<br><span
-              style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.4em;color:var(--gold);display:block;margin:10px 0;">et</span>SiMohamed
-            Bennani</span>
-          <p class="ibody">
-            ont le bonheur de vous annoncer leur union<br>
-            et vous prient de leur faire l'honneur<br>
-            d'assister à la célébration de leur mariage
-          </p>
-        </div>
+        <h2 class="st" style="font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 30px;">Famille CHARAF<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.6em;color:var(--gold);display:block;margin:10px 0;">&amp;</span>Famille BENNANI</h2>
+        <p class="sb">ont l'immense joie de vous annoncer<br>le mariage de leurs enfants</p>
       </div>
 
-      <!-- SLIDE 5: PROGRAMME -->
+      <!-- SLIDE 5: NAMES & STORY -->
       <div class="slide">
-        <span class="ey">Le Programme</span>
-        <h2 class="st">Le déroulé de la soirée</h2>
         <div class="sdiv"><span>✦</span></div>
-        <div class="tl-wrap">
-          <div class="ti">
-            <span class="tt">17h00</span>
-            <div class="tc">
-              <div class="tn">Accueil des invités</div>
-              <div class="td">Arrivée & cocktail de bienvenue<br>dans les jardins</div>
-            </div>
-          </div>
-          <div class="ti" style="border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);">
-            <span class="tt" style="color:var(--gold2);">19h30</span>
-            <div class="tc">
-              <div class="tn" style="color:var(--gold2);">Entrée de la Mariée</div>
-              <div class="td">Le moment tant attendu</div>
-            </div>
-          </div>
-          <div class="ti">
-            <span class="tt">21h00</span>
-            <div class="tc">
-              <div class="tn">Dîner & Célébration</div>
-              <div class="td">Gastronomie, musique & danse</div>
-            </div>
-          </div>
-        </div>
+        <span class="inames" style="font-size: clamp(3.5rem, 9vw, 6rem); margin-bottom: 20px;">Imane<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.5em;color:var(--gold);display:block;margin:5px 0;">&amp;</span>Mohamed</span>
+        <p class="q-fr" style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-top: 20px;">Une histoire écrite à deux, une nouvelle page qui commence...</p>
+        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
       </div>
 
-      <!-- SLIDE 6: VENUE & COUNTDOWN -->
+      <!-- SLIDE 6: SAVE THE DATE -->
       <div class="slide">
+        <span class="ey">Save The Date</span>
+        <h2 class="st">Samedi 29 Août 2026</h2>
+        <p class="sb" style="margin-bottom: 30px;">Un jour de bonheur que nous serions honorés<br>de partager avec vous.</p>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+et+Mohamed&dates=20260829T160000Z/20260829T230000Z&details=C%C3%A9l%C3%A9bration+de+notre+mariage&location=Dar+El+Ghalia,+Bouskoura" target="_blank" class="mbtn">Ajouter au calendrier</a>
+      </div>
+
+      <!-- SLIDE 7: VENUE -->
+      <div class="slide" style="background-image: linear-gradient(rgba(26,21,18,0.75), rgba(26,21,18,0.85)), url('fond-dar-el-ghalia.jpg'); background-size: cover; background-position: center;">
         <span class="ey">Le Lieu</span>
         <h2 class="st">Dar El Ghalia</h2>
-        <p class="sb">Un palais de rêve où le raffinement marocain<br>rencontre l'élégance intemporelle.</p>
+        <p class="sb" style="margin-bottom: 20px; font-size: 1.2rem;">📍 Bouskoura</p>
+        <a href="https://www.waze.com/fr/live-map/directions/ma/casablanca-settat/bouskoura/dar-el-ghalia?utm_campaign=default&utm_medium=lm_share_location&utm_source=waze_website&to=place.ChIJe6ljfV8ppg0RXXsKLbuqVVc" target="_blank" class="mbtn">Y aller avec Waze</a>
+      </div>
+
+      <!-- SLIDE 8: COUNTDOWN -->
+      <div class="slide">
+        <h2 class="st" style="margin-bottom: 10px;">Le grand jour approche</h2>
+        <div class="sdiv"><span>✦</span></div>
         <div class="cdg">
           <div class="cdt"><span class="cdn" id="cdd">000</span><span class="cdl">Jours</span></div>
           <div class="cdt"><span class="cdn" id="cdh">00</span><span class="cdl">Heures</span></div>
           <div class="cdt"><span class="cdn" id="cdm">00</span><span class="cdl">Minutes</span></div>
           <div class="cdt"><span class="cdn" id="cds">00</span><span class="cdl">Secondes</span></div>
         </div>
-        <a href="https://maps.google.com/?q=Dar+El+Ghalia+Maroc" target="_blank" class="mbtn">Voir sur la carte →</a>
       </div>
 
-      <!-- SLIDE 8: MARRIAGE QUOTE -->
+      <!-- SLIDE 9: IMPORTANT -->
       <div class="slide">
+        <span class="ey">Important à noter</span>
         <div class="sdiv"><span>✦</span></div>
-        <p class="q-fr" style="font-size:clamp(1.4rem, 3.5vw, 2rem); line-height: 1.6;">« L'amour véritable est celui qui embellit l'âme et nous rapproche de Dieu. »</p>
-        <div class="sdiv" style="margin-top: 32px;"><span>✦</span></div>
+        <div class="tl-wrap" style="margin-top: 20px;">
+          <div class="ti">
+            <span class="tt">17h00</span>
+            <div class="tc">
+              <div class="tn">Accueil des invités</div>
+            </div>
+          </div>
+          <div class="ti" style="border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);">
+            <span class="tt" style="color:var(--gold2);">19h30</span>
+            <div class="tc">
+              <div class="tn" style="color:var(--gold2);">Entrée de la mariée</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- SLIDE 9: RSVP -->
+      <!-- SLIDE 10: MERCI & RSVP -->
       <div class="slide">
         <span class="ey">Répondre avant le 1er Juillet 2026</span>
-        <h2 class="st">Serez-vous des nôtres ?</h2>
-        <div class="sdiv"><span>✦</span></div>
+        <h2 class="st" style="font-size: clamp(3rem, 8vw, 5rem); font-family: 'Great Vibes', cursive; color: var(--gold2); margin-bottom: 10px;">Merci</h2>
+        <p class="sb">Au plaisir de vous compter parmi nous.</p>
         <div class="rc-wrap">
           <div class="rc" onclick="openRSVP('yes')">
             <span style="font-size:2.5rem;display:block;">💌</span>
             <span class="rct">J'accepte avec joie</span>
             <span class="rcs">Confirmer ma présence</span>
-          </div>
-          <div class="rc" onclick="openRSVP('no')">
-            <span style="font-size:2.5rem;display:block;">🕊️</span>
-            <span class="rct">Je ne pourrai pas venir</span>
-            <span class="rcs">Transmettre mes vœux</span>
           </div>
         </div>
       </div>
@@ -1251,7 +1264,15 @@
     const cur = document.getElementById('cursor'), cring = document.getElementById('cring');
     let mx = 0, my = 0, rx = 0, ry = 0;
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
-    (function ar() { rx += (mx - rx) * .12; ry += (my - ry) * .12; cring.style.left = rx + 'px'; cring.style.top = ry + 'px'; requestAnimationFrame(ar); })();
+    (function ar() { 
+      rx += (mx - rx) * .12; ry += (my - ry) * .12; 
+      cring.style.left = rx + 'px'; cring.style.top = ry + 'px'; 
+      let px = (rx / window.innerWidth - 0.5) * -30;
+      let py = (ry / window.innerHeight - 0.5) * -30;
+      document.documentElement.style.setProperty('--px', `${px}px`);
+      document.documentElement.style.setProperty('--py', `${py}px`);
+      requestAnimationFrame(ar); 
+    })();
     document.querySelectorAll('button,a,.rc,.seal-wrap,.vinyl,.mbtn,.nav-dot').forEach(el => {
       el.addEventListener('mouseenter', () => { cur.style.width = '14px'; cur.style.height = '14px'; cring.style.width = '50px'; cring.style.height = '50px'; cring.style.borderColor = 'rgba(201,168,76,.7)'; });
       el.addEventListener('mouseleave', () => { cur.style.width = '8px'; cur.style.height = '8px'; cring.style.width = '32px'; cring.style.height = '32px'; cring.style.borderColor = 'rgba(201,168,76,.4)'; });
@@ -1261,6 +1282,7 @@
     function crackSeal() {
       const w = document.getElementById('swrap');
       w.classList.add('cracking'); w.onclick = null;
+      document.getElementById('intro').classList.add('cracking');
       const wr = w.getBoundingClientRect();
       for (let i = 0; i < 15; i++) {
         const sp = document.createElement('div'); sp.className = 'spark';
@@ -1272,11 +1294,38 @@
       setTimeout(() => {
         document.getElementById('intro').classList.add('out');
         document.getElementById('name-screen').classList.add('active');
-      }, 700);
+      }, 1200);
+    }
+
+    function initDust() {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'dust-canvas';
+      canvas.style.cssText = 'position:fixed; inset:0; pointer-events:none; z-index:1; opacity: 0; transition: opacity 2s;';
+      document.getElementById('main').prepend(canvas);
+      setTimeout(() => canvas.style.opacity = '1', 1000);
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      window.addEventListener('resize', resize); resize();
+      for(let i=0; i<60; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+0.5, vx: (Math.random()-0.5)*0.2, vy: -Math.random()*0.3 - 0.1 });
+      function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.y < -10) p.y = canvas.height + 10;
+          if (p.x < -10) p.x = canvas.width + 10;
+          if (p.x > canvas.width + 10) p.x = -10;
+          ctx.fillStyle = `rgba(201,168,76,${Math.random()*0.4 + 0.1})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
     }
 
     function enterSite() {
       document.getElementById('name-screen').classList.add('out');
+      initDust();
       setTimeout(() => {
         document.getElementById('main').classList.add('on');
         document.getElementById('mplayer').style.display = 'flex';
@@ -1294,7 +1343,7 @@
     let currentSlide = 0;
     let isAnimating = false;
     let autoPlayTimer = null;
-    const SLIDE_DURATION = 8000; // 8 seconds per slide
+    const SLIDE_DURATION = 4500; // Faster transition between pages
     let autoPlayActive = false;
 
     function updateNav() {
@@ -1307,8 +1356,8 @@
       if (index === currentSlide || isAnimating || index < 0 || index >= slides.length) return;
       isAnimating = true;
 
-      // Start music automatically after the Quran verse (if not already playing)
-      if (index >= 1 && ytp && typeof ytp.playVideo === 'function' && !playing) {
+      // Start music automatically starting from Page 4 (Families, index 3)
+      if (index >= 3 && ytp && typeof ytp.playVideo === 'function' && !playing) {
         ytp.playVideo();
       }
 
@@ -1328,7 +1377,7 @@
         }
       }
 
-      setTimeout(() => isAnimating = false, 1500);
+      setTimeout(() => isAnimating = false, 1100);
     }
 
     function nextSlide(isAuto = false) { goToSlide(currentSlide + 1, isAuto); }
@@ -1395,8 +1444,8 @@
     const ytTag = document.createElement('script'); ytTag.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(ytTag);
     window.onYouTubeIframeAPIReady = function () {
       ytp = new YT.Player('yt-player', {
-        videoId: 'd5BXSnErIZE',
-        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'd5BXSnErIZE' },
+        videoId: 'Jj5QIPnTMZE',
+        playerVars: { autoplay: 0, controls: 0, loop: 0, end: 51 },
         events: {
           onStateChange: e => {
             playing = e.data === YT.PlayerState.PLAYING;
