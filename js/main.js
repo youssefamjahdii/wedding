@@ -119,9 +119,9 @@ const Film = (() => {
         break;
 
       case 1: // Bismillah
-        tl.to(`${sel} .bismillah-text`, { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, at + 0.2)
-          .from(`${sel} .bismillah-sub`, { opacity: 0, y: 14, duration: 0.8, ease: 'power2.out' }, at + 0.9)
-          .to(`${sel} .bismillah-sub`, { opacity: 1, duration: 0.8 }, at + 0.9);
+        tl.to(`${sel} .bismillah-text`, { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, at)
+          .from(`${sel} .bismillah-sub`, { opacity: 0, y: 14, duration: 0.8, ease: 'power2.out' }, at + 0.5)
+          .to(`${sel} .bismillah-sub`, { opacity: 1, duration: 0.8 }, at + 0.5);
         break;
 
       case 2: // Verset
