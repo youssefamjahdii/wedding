@@ -570,7 +570,7 @@
   opacity: 0;
   transform: translateY(10px);
   transition: background 0.35s, border-color 0.35s;
-  pointer-events: auto;
+  pointer-events: none;
   position: relative; overflow: hidden;
 }
 .std-cal::before {
@@ -652,7 +652,7 @@
   text-decoration: none;
   cursor: pointer;
   opacity: 0;
-  pointer-events: auto;
+  pointer-events: none;
   transition: background 0.35s, border-color 0.35s;
   position: relative; overflow: hidden;
 }
@@ -900,7 +900,7 @@
   text-transform: uppercase;
   cursor: pointer;
   opacity: 0;
-  pointer-events: auto;
+  pointer-events: none;
   transition: background 0.35s, border-color 0.35s;
   position: relative; overflow: hidden;
 }

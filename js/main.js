@@ -96,7 +96,8 @@ const Film = (() => {
     const sc   = document.querySelector(sel);
     if (!sc) return;
 
-    // Shared: fade scene in
+    // Shared: fade scene in & manage pointer events
+    tl.call(() => sc.classList.add('visible'), [], at);
     tl.to(sel, { opacity: 1, duration: IN, ease: 'power2.inOut' }, at);
 
     // Background color
@@ -138,8 +139,7 @@ const Film = (() => {
           .from(`${sel} .families-sub`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.5)
           .from(`${sel} .btn-wrap`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.8)
           .call(() => {
-            const film = document.getElementById('film');
-            if (film) film.style.pointerEvents = 'auto';
+            // Scene 3 logic (nothing needed here now as .visible handles it)
           }, [], at + 0.9);
         break;
 
@@ -253,6 +253,8 @@ const Film = (() => {
 
   function sceneOut(idx, tl, at) {
     const sel = `#scene-${idx + 1}`;
+    const sc = document.querySelector(sel);
+    if (!sc) return;
     // Each scene has a unique exit
     switch (idx) {
       case 0: // Bismillah — float up and fade
@@ -274,6 +276,8 @@ const Film = (() => {
         tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at);
         break;
     }
+    // Shared: remove visible class after exit
+    tl.call(() => sc.classList.remove('visible'), [], at + OUT);
     // Reset element transforms/opacity after scene is invisible
     tl.set(sel, { clearProps: 'filter,y,scale' }, at + OUT + 0.2);
   }
@@ -303,7 +307,10 @@ const Film = (() => {
     buildDots();
 
     const film = document.getElementById('film');
-    if (film) film.classList.add('running');
+    if (film) {
+      film.classList.add('running');
+      film.style.pointerEvents = 'auto';
+    }
 
     const dotsEl = document.getElementById('progress-dots');
     if (dotsEl) dotsEl.classList.add('on');
@@ -322,7 +329,9 @@ const Film = (() => {
     Music.stop();
     // Re-enable film pointer events (in case paused on music scene)
     const film = document.getElementById('film');
-    if (film) film.style.pointerEvents = 'none';
+    if (film) film.style.pointerEvents = 'auto';
+    // Clear all visible classes
+    document.querySelectorAll('.scene').forEach(s => s.classList.remove('visible'));
     // Reset all scenes
     document.querySelectorAll('.scene').forEach(s => {
       gsap.set(s, { opacity: 0, clearProps: 'filter,y,scale,x' });
@@ -338,8 +347,7 @@ const Film = (() => {
   }
 
   function resumeAndPlay() {
-    const film = document.getElementById('film');
-    if (film) film.style.pointerEvents = 'none';
+    // Pointer events handled by .visible class now
     if (tl) {
       tl.seek(musicSceneEndTime);
       tl.play();
