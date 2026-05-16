@@ -120,22 +120,9 @@ const Music = (() => {
     if (!player) return;
     try {
       if (playing) player.pauseVideo();
-      else {
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-      }
+      else         player.playVideo();
     } catch(e) {}
   }
 
-  function play() {
-    if (!player) return;
-    try {
-      player.unMute();
-      player.setVolume(100);
-      player.playVideo();
-    } catch(e) {}
-  }
-
-  return { fadeIn, toggle, play };
+  return { fadeIn, toggle };
 })();
