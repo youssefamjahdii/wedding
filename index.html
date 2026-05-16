@@ -108,7 +108,7 @@
       <div class="scene-ornament" style="margin-bottom: 20px;"><span>✦</span></div>
       <p class="families-sub" style="opacity:1; margin-bottom: 35px; font-size: 1.4rem; max-width: 450px; margin-left: auto; margin-right: auto;">Avez-vous hâte de célébrer ce grand jour avec nous ?</p>
       <div class="btn-wrap" style="display:flex; flex-direction:column; align-items:center;">
-        <button onclick="if(window.Music) Music.play(); Film.resumeAndPlay();" style="pointer-events:auto; background:var(--terra); color:var(--cream); border:none; padding:14px 45px; border-radius:4px; cursor:pointer; font-size:1.2rem; font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em; box-shadow:0 4px 15px rgba(193,103,79,0.2); transition: all 0.3s;">
+        <button onclick="if(typeof Music !== 'undefined') Music.play(); Film.resumeAndPlay();" style="pointer-events:auto; background:var(--terra); color:var(--cream); border:none; padding:14px 45px; border-radius:4px; cursor:pointer; font-size:1.2rem; font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em; box-shadow:0 4px 15px rgba(193,103,79,0.2); transition: all 0.3s;">
           Oui, avec grande joie !
         </button>
       </div>
