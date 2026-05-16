@@ -79,7 +79,7 @@ const Music = (() => {
   window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player('yt-player', {
       videoId: VIDEO_ID,
-      playerVars: { autoplay: 0, controls: 0, loop: 0, start: 0, rel: 0 },
+      playerVars: { autoplay: 0, controls: 0, loop: 0, start: 0, rel: 0, playsinline: 1 },
       events: {
         onStateChange: e => {
           playing = e.data === YT.PlayerState.PLAYING;
@@ -95,10 +95,11 @@ const Music = (() => {
   };
 
   function fadeIn(duration = 3000) {
-    if (!player || typeof player.setVolume !== 'function') return;
+    if (!player || typeof player.playVideo !== 'function') return;
+    try { player.unMute(); } catch(e) {}
+    try { player.playVideo(); } catch(e) {}
     try {
       player.setVolume(0);
-      player.playVideo();
       const steps = 40;
       const step  = duration / steps;
       let i = 0;
