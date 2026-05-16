@@ -136,6 +136,10 @@ const Film = (() => {
           .from(`${sel} .scene-ornament`, { opacity: 0, scale: 0.5, duration: 0.6 }, at + 0.3)
           .from(`${sel} .families-sub`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.5)
           .from(`${sel} .btn-wrap`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.8)
+          .call(() => {
+            const film = document.getElementById('film');
+            if (film) film.style.pointerEvents = 'auto';
+          }, [], at + 0.9)
           .addPause(); // Pause until user interacts
         break;
 
@@ -328,6 +332,8 @@ const Film = (() => {
   }
 
   function resumeAndPlay() {
+    const film = document.getElementById('film');
+    if (film) film.style.pointerEvents = 'none';
     if (tl && tl.paused()) tl.play();
   }
 
