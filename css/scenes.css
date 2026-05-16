@@ -28,8 +28,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--cream);
+  background: var(--night);
   overflow: hidden;
+}
+
+/* Animated zellige overlay for intro */
+#intro-zellige {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(193,103,79,.07) 0, rgba(193,103,79,.07) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(193,103,79,.07) 0, rgba(193,103,79,.07) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(  0deg, rgba(184,136,42,.04) 0, rgba(184,136,42,.04) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient( 90deg, rgba(184,136,42,.04) 0, rgba(184,136,42,.04) 1px, transparent 0, transparent 50%);
+  background-size: 42px 42px;
+  animation: zellige-drift 18s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes zellige-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 84px 84px; }
 }
 
 .ribbon-frame {

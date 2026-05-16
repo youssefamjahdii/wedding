@@ -317,6 +317,11 @@ const Film = (() => {
   /* ─── REPLAY ─── */
   function replay() {
     if (!tl) return;
+    // Stop music and reset it
+    Music.stop();
+    // Re-enable film pointer events (in case paused on music scene)
+    const film = document.getElementById('film');
+    if (film) film.style.pointerEvents = 'none';
     // Reset all scenes
     document.querySelectorAll('.scene').forEach(s => {
       gsap.set(s, { opacity: 0, clearProps: 'filter,y,scale,x' });

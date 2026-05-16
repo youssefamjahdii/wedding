@@ -119,10 +119,24 @@ const Music = (() => {
   function toggle() {
     if (!player) return;
     try {
-      if (playing) player.pauseVideo();
-      else         player.playVideo();
+      if (playing) {
+        player.pauseVideo();
+        if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+      } else {
+        player.playVideo();
+        if (stopTimer) clearTimeout(stopTimer);
+        stopTimer = setTimeout(() => {
+          try { player.pauseVideo(); } catch(e) {}
+        }, STOP_AT * 1000);
+      }
     } catch(e) {}
   }
 
-  return { fadeIn, toggle };
+  function stop() {
+    if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+    if (!player) return;
+    try { player.pauseVideo(); player.seekTo(0); } catch(e) {}
+  }
+
+  return { fadeIn, toggle, stop };
 })();
