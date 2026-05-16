@@ -331,25 +331,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 16px; /* Exact gap between names */
   margin: 10px 0 24px 0;
+  position: relative;
 }
 .families-names {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 9vw, 6rem);
+  font-size: clamp(2.8rem, 10vw, 6.5rem);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--terra);
-  line-height: 1;
+  line-height: 0.85; /* Tight bounding box */
+  margin: 0;
   opacity: 0;
+  z-index: 1;
 }
 .families-amp {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(3.5rem, 12vw, 6.5rem); /* Make it more prominent */
   color: var(--gold);
-  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  line-height: 0;
   opacity: 0;
+  z-index: 2;
+  text-shadow: 0 0 20px rgba(253, 246, 236, 0.8); /* Glow to stand out over letters */
 }
 .families-sub {
   font-family: 'Cormorant Garamond', serif;

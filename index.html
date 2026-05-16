@@ -39,132 +39,11 @@
   <div id="yt-player" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></div>
 
   <!-- ═══════════════════════════════════════════
-     RIBBON INTRO SCREEN
+     VIDEO INTRO SCREEN
 ═══════════════════════════════════════════ -->
-  <div id="ribbon-screen">
-    <div class="ribbon-frame">
-      <div class="c1"></div>
-      <div class="c2"></div>
-    </div>
-
-    <!-- Envelope graphic -->
-    <div class="envelope-wrap">
-      <svg class="envelope-svg" viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="envGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#e8d8c4" />
-            <stop offset="100%" stop-color="#d4c0a8" />
-          </linearGradient>
-          <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#e0ccb4" />
-            <stop offset="100%" stop-color="#cdb898" />
-          </linearGradient>
-          <filter id="envShadow">
-            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(93,61,46,0.18)" />
-          </filter>
-          <pattern id="interiorPattern" width="30" height="30" patternUnits="userSpaceOnUse"
-            patternTransform="rotate(45)">
-            <path d="M0 15 L30 15 M15 0 L15 30" stroke="rgba(201,168,76,0.15)" stroke-width="0.5" />
-            <circle cx="15" cy="15" r="1.5" fill="rgba(201,168,76,0.25)" />
-          </pattern>
-        </defs>
-
-        <!-- Envelope body -->
-        <rect x="10" y="50" width="300" height="150" rx="4" fill="url(#envGrad)" filter="url(#envShadow)"
-          stroke="rgba(184,136,42,0.3)" stroke-width="1" />
-
-        <!-- Interior (visible when open) -->
-        <g id="envelope-interior">
-          <rect x="10" y="50" width="300" height="150" rx="4" fill="#4a3224" />
-          <path d="M10 50 L310 50 L310 200 L10 200 Z" fill="url(#interiorPattern)" />
-        </g>
-
-        <!-- Initials on envelope body -->
-        <text x="160" y="148" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="40"
-          fill="rgba(193,103,79,0.55)">I &amp; M</text>
-
-        <!-- Bottom left/right triangles (envelope sides) -->
-        <path d="M10 50 L160 145 L310 50" fill="rgba(0,0,0,0)" stroke="rgba(184,136,42,0.2)" stroke-width="1" />
-
-        <!-- Bottom triangle -->
-        <path d="M10 200 L160 128 L310 200 Z" fill="#cfc0a0" opacity="0.8" />
-
-        <!-- Top flap group (animatable) -->
-        <g id="envelope-flap-group" style="transform-origin:160px 50px;transform-box:fill-box;">
-          <path d="M10 50 L160 138 L310 50 Z" fill="url(#flapGrad)" stroke="rgba(184,136,42,0.25)" stroke-width="1" />
-          <!-- Gold foil edge inner -->
-          <path d="M15 53 L160 133 L305 53" fill="none" stroke="url(#ribbonGrad)" stroke-width="1.2" opacity="0.7" />
-        </g>
-
-        <!-- Wax seal on flap -->
-        <g id="wax-seal-group">
-          <circle cx="160" cy="98" r="28" fill="#c1674f" filter="url(#envShadow)" />
-          <circle cx="160" cy="98" r="28"
-            fill="radial-gradient(circle at 40% 35%, rgba(255,200,160,0.3), transparent)" />
-          <circle cx="160" cy="98" r="24" fill="none" stroke="rgba(255,210,180,0.3)" stroke-width="1" />
-          <!-- Star in seal -->
-          <polygon points="160,80 163,92 176,92 166,100 169,112 160,104 151,112 154,100 144,92 157,92" fill="none"
-            stroke="rgba(255,230,200,0.35)" stroke-width="0.8" />
-          <text x="160" y="93" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="13"
-            fill="rgba(255,245,235,0.92)">I</text>
-          <text x="160" y="103" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7"
-            fill="rgba(255,235,210,0.6)" font-style="italic">&amp;</text>
-          <text x="160" y="117" text-anchor="middle" font-family="'Great Vibes',cursive" font-size="13"
-            fill="rgba(255,245,235,0.92)">M</text>
-        </g>
-      </svg>
-
-      <!-- Ribbon on top -->
-      <svg id="ribbon-svg" class="ribbon-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg"
-        style="transform:translateX(-50%);">
-        <defs>
-          <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#b8882a" />
-            <stop offset="40%" stop-color="#e8c96e" />
-            <stop offset="100%" stop-color="#b8882a" />
-          </linearGradient>
-          <linearGradient id="ribbonGrad2" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#c9a84c" />
-            <stop offset="50%" stop-color="#f5e4a8" />
-            <stop offset="100%" stop-color="#c9a84c" />
-          </linearGradient>
-        </defs>
-
-        <!-- Left bow lobe -->
-        <g id="bow-left" style="transform-origin:60px 42px;transform-box:fill-box;">
-          <ellipse cx="34" cy="36" rx="28" ry="16" fill="url(#ribbonGrad)" opacity="0.9"
-            transform="rotate(-25,60,42)" />
-          <ellipse cx="34" cy="36" rx="22" ry="10" fill="url(#ribbonGrad2)" opacity="0.5"
-            transform="rotate(-25,60,42)" />
-        </g>
-
-        <!-- Right bow lobe -->
-        <g id="bow-right" style="transform-origin:60px 42px;transform-box:fill-box;">
-          <ellipse cx="86" cy="36" rx="28" ry="16" fill="url(#ribbonGrad)" opacity="0.9" transform="rotate(25,60,42)" />
-          <ellipse cx="86" cy="36" rx="22" ry="10" fill="url(#ribbonGrad2)" opacity="0.5"
-            transform="rotate(25,60,42)" />
-        </g>
-
-        <!-- Ribbon tails -->
-        <path d="M50 50 L40 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round" />
-        <path d="M70 50 L80 100" stroke="url(#ribbonGrad)" stroke-width="8" stroke-linecap="round" />
-        <!-- Tail shine -->
-        <path d="M52 50 L43 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5" />
-        <path d="M68 50 L77 100" stroke="url(#ribbonGrad2)" stroke-width="3" stroke-linecap="round" opacity="0.5" />
-
-        <!-- Knot -->
-        <g id="bow-knot" style="transform-origin:60px 44px;transform-box:fill-box;">
-          <ellipse cx="60" cy="44" rx="12" ry="10" fill="url(#ribbonGrad)" />
-          <ellipse cx="60" cy="44" rx="8" ry="6" fill="url(#ribbonGrad2)" opacity="0.6" />
-        </g>
-      </svg>
-    </div>
-
-    <!-- Hint text -->
-    <div class="ribbon-hint" id="ribbon-hint">
-      <p>Tirez le ruban pour ouvrir</p>
-      <div class="ribbon-hint-arrow"></div>
-    </div>
+  <div id="ribbon-screen" style="position:fixed; inset:0; z-index:500; background:var(--night); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+    <video id="intro-video" src="VIDEO.mp4" playsinline muted style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>
+    <button id="btn-open-invitation" style="position:absolute; z-index:10; bottom:10%; padding: 15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--terra); color:var(--terra); font-family:'Raleway',sans-serif; letter-spacing:0.3em; text-transform:uppercase; font-size:var(--fs-xs); cursor:pointer; backdrop-filter:blur(5px); transition:all 0.3s; border-radius:4px;">Ouvrir l'invitation</button>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -230,6 +109,7 @@
         <p class="verse-french">« Et parmi Ses signes, Il a créé pour vous des épouses issues de vous-mêmes pour que
           vous viviez en tranquillité auprès d'elles, et Il a mis entre vous de l'amour et de la miséricorde. »</p>
         <p class="verse-source">Sourate Ar-Rûm · Verset 21</p>
+        <button id="secret-music-btn" onclick="if(window.Music){Music.toggle();} this.style.opacity='0'; this.style.pointerEvents='none';" style="margin-top:20px; border:none; background:transparent; color:var(--gold); font-size:1.5rem; cursor:pointer; opacity:0; transition:opacity 1s, transform 0.3s; transform:translateY(10px); display:block; padding:10px;">✦</button>
       </div>
     </div>
 
@@ -237,30 +117,35 @@
     <div class="scene light-bg" id="scene-4">
       <p class="families-pre">Avec toute leur joie</p>
       <div class="scene-ornament" style="margin-bottom: 20px;"><span>✦</span></div>
-      <p class="families-les">Les familles</p>
-      <div class="families-names-wrap">
-        <p class="families-names">Charaf</p>
-        <p class="families-amp">&amp;</p>
-        <p class="families-names">Bennani</p>
+      
+      <div class="families-names-wrap" style="flex-direction:row; gap:15px; align-items:center; width:100%; justify-content:center;">
+        <div class="families-names" style="font-size: clamp(1.2rem, 4vw, 2.8rem); max-width:45%; text-align:right; line-height:1.4;">
+          <span style="font-size:0.5em; display:block; font-family:'Cormorant Garamond',serif; color:rgba(61,43,31,0.8); letter-spacing:0.05em; text-transform:none; margin-bottom:5px;">La famille</span>
+          Charaf &amp;<br>Chourak
+        </div>
+        <div class="families-amp" style="position:static; transform:none; font-size:clamp(1.8rem, 5vw, 3rem); text-shadow:none; margin:0 10px;">Et</div>
+        <div class="families-names" style="font-size: clamp(1.2rem, 4vw, 2.8rem); max-width:45%; text-align:left; line-height:1.4;">
+          <span style="font-size:0.5em; display:block; font-family:'Cormorant Garamond',serif; color:rgba(61,43,31,0.8); letter-spacing:0.05em; text-transform:none; margin-bottom:5px;">La famille</span>
+          Bennani &amp;<br>Jamal Eddine
+        </div>
       </div>
-      <p class="families-sub">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
+      <p class="families-sub" style="margin-top:24px;">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
     </div>
 
     <!-- ── SCENE 5: Imane & Mohamed ── -->
     <div class="scene light-bg" id="scene-5">
       <p class="couple-pre">Deux âmes, une histoire</p>
       <div id="name-svg-wrap">
-        <p class="couple-names-text">
-          Imane Charaf
+        <p class="couple-names-text" style="font-size: clamp(2.5rem, 9vw, 5.5rem); color: var(--terra);">
+          Imane
           <span class="et">et</span>
-          Mohamed Bennani
+          Simohamed
         </p>
       </div>
       <div class="couple-ornament">
         <div class="orn-dia"></div>
       </div>
-      <p class="couple-phrase">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils
-        s'unissent pour l'éternité. »</p>
+      <p class="couple-phrase" style="font-size: clamp(1.3rem, 3.5vw, 1.8rem); color: var(--mocha); font-weight: 400; max-width: 600px;">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils s'unissent pour l'éternité. »</p>
     </div>
 
     <!-- ── SCENE 6: Save the Date ── -->
@@ -279,7 +164,7 @@
       <p class="std-phrase">Un jour de bonheur que nous serions<br>honorés de partager avec vous.</p>
       <a class="std-cal"
         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mariage+Imane+%26+Mohamed&dates=20260829T150000Z%2F20260830T000000Z&details=Dar+El+Ghalia%2C+Bouskoura&location=Dar+El+Ghalia%2C+Bouskoura"
-        target="_blank" rel="noopener">
+        target="_blank" rel="noopener" style="background:var(--terra); color:var(--cream); border:none; padding:15px 40px; font-weight:400; border-radius:4px; box-shadow:0 4px 15px rgba(193,103,79,0.3);">
         📅 &nbsp;Ajouter au calendrier
       </a>
     </div>
@@ -288,7 +173,7 @@
     <div class="scene light-bg" id="scene-7">
       <p class="venue-eyebrow">Le Lieu</p>
       <p class="venue-name">Dar El Ghalia</p>
-      <p class="venue-addr">📍 Bouskoura, Casablanca-Settat · Maroc</p>
+      <p class="venue-addr" style="margin-top: 30px; margin-bottom: 24px; font-size:clamp(0.8rem, 2vw, 1.2rem);">📍 Bouskoura</p>
 
       <!-- Palace silhouette -->
       <svg class="venue-palace" id="venue-palace" viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -350,12 +235,12 @@
     <!-- ── SCENE 8: Compte à rebours ── -->
     <div class="scene light-bg" id="scene-8">
       <p class="cd-eyebrow">Le grand jour approche</p>
-      <h2 class="cd-title">Compte à rebours</h2>
+      <h2 class="cd-title" style="color:var(--terra);">Compte à rebours</h2>
       <div class="cd-grid">
-        <div class="cd-tile"><span class="cd-num" id="cdd">000</span><span class="cd-lbl">Jours</span></div>
-        <div class="cd-tile"><span class="cd-num" id="cdh">00</span><span class="cd-lbl">Heures</span></div>
-        <div class="cd-tile"><span class="cd-num" id="cdm">00</span><span class="cd-lbl">Minutes</span></div>
-        <div class="cd-tile"><span class="cd-num" id="cds">00</span><span class="cd-lbl">Secondes</span></div>
+        <div class="cd-tile" style="border-color:rgba(193,103,79,0.4);"><span class="cd-num" id="cdd">000</span><span class="cd-lbl" style="color:rgba(93,61,46,0.6);">Jours</span></div>
+        <div class="cd-tile" style="border-color:rgba(193,103,79,0.4);"><span class="cd-num" id="cdh">00</span><span class="cd-lbl" style="color:rgba(93,61,46,0.6);">Heures</span></div>
+        <div class="cd-tile" style="border-color:rgba(193,103,79,0.4);"><span class="cd-num" id="cdm">00</span><span class="cd-lbl" style="color:rgba(93,61,46,0.6);">Minutes</span></div>
+        <div class="cd-tile" style="border-color:rgba(193,103,79,0.4);"><span class="cd-num" id="cds">00</span><span class="cd-lbl" style="color:rgba(93,61,46,0.6);">Secondes</span></div>
       </div>
       <p class="cd-info">Samedi 29 Août 2026 · Dar El Ghalia · 17h00</p>
     </div>
@@ -390,14 +275,16 @@
 
     <!-- ── SCENE 10: Merci ── -->
     <div class="scene light-bg" id="scene-10">
-      <p class="merci-big">Merci</p>
+      <p class="merci-big" style="font-size: clamp(4rem, 15vw, 7rem);">Merci</p>
       <div class="merci-divider">
         <div class="merci-divider-gem"></div>
       </div>
       <p class="merci-sub">Au plaisir de vous compter parmi nous.</p>
-      <p class="merci-recap">
-        29 Août 2026 · Dar El Ghalia · Bouskoura<br>
-        Accueil dès 17h · Entrée de la mariée à 19h30
+      <p class="merci-recap" style="line-height:2.2; font-size:clamp(1rem, 3vw, 1.3rem);">
+        <strong>29 Août 2026</strong><br>
+        Dar El Ghalia · Bouskoura<br>
+        Accueil dès 17h00<br>
+        Entrée de la mariée à 19h30
       </p>
       <button class="merci-replay" onclick="Film.replay()">
         ↺ &nbsp;Revoir l'invitation

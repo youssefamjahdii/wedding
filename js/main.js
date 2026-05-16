@@ -133,15 +133,15 @@ const Film = (() => {
           .from(`${sel} .verse-french`, { opacity: 0, y: 16, duration: 1, ease: 'power2.out' }, at + 2.5)
           .to(`${sel} .verse-french`, { opacity: 1, duration: 1 }, at + 2.5)
           .from(`${sel} .verse-source`, { opacity: 0, duration: 0.6 }, at + 3.5)
-          .to(`${sel} .verse-source`, { opacity: 1, duration: 0.6 }, at + 3.5);
+          .to(`${sel} .verse-source`, { opacity: 1, duration: 0.6 }, at + 3.5)
+          .from(`${sel} #secret-music-btn`, { opacity: 0, duration: 1 }, at + 4.0)
+          .to(`${sel} #secret-music-btn`, { opacity: 1, duration: 1 }, at + 4.0);
         break;
 
       case 3: // Familles — music starts here
-        tl.call(() => { Music.fadeIn(3000); Particles.startPetals(); }, [], at + 0.1)
+        tl.call(() => { Particles.startPetals(); }, [], at + 0.1)
           .from(`${sel} .families-pre`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.1)
           .to(`${sel} .families-pre`, { opacity: 1, duration: 0.6 }, at + 0.1)
-          .from(`${sel} .families-les`, { opacity: 0, y: 16, duration: 0.7 }, at + 0.4)
-          .to(`${sel} .families-les`, { opacity: 1, duration: 0.7 }, at + 0.4)
           // SLAM
           .from(`${sel} .families-names`, {
             opacity: 0, y: 55, scale: 0.88,
