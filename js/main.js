@@ -149,6 +149,7 @@ const Film = (() => {
         break;
 
       case 4: // Familles
+        tl.call(() => { Particles.startPetals(); }, [], at + 0.1)
           .from(`${sel} .families-pre`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.1)
           .to(`${sel} .families-pre`, { opacity: 1, duration: 0.6 }, at + 0.1)
           // SLAM
