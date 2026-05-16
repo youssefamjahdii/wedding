@@ -7,6 +7,7 @@ const Film = (() => {
   const dots = [];
   let tl = null;  // master GSAP timeline
   let sceneTimelines = [];
+  let musicPaused = false; // flag: waiting for user at music scene
 
   /* ─── Scene durations (seconds each scene is fully visible) ─── */
   const HOLD = [
@@ -139,8 +140,9 @@ const Film = (() => {
           .call(() => {
             const film = document.getElementById('film');
             if (film) film.style.pointerEvents = 'auto';
-          }, [], at + 0.9)
-          .addPause(); // Pause until user interacts
+            musicPaused = true;
+            tl.pause();
+          }, [], at + 0.9);
         break;
 
       case 3: // Familles
@@ -339,7 +341,8 @@ const Film = (() => {
   function resumeAndPlay() {
     const film = document.getElementById('film');
     if (film) film.style.pointerEvents = 'none';
-    if (tl && tl.paused()) tl.play();
+    musicPaused = false;
+    if (tl) tl.play();
   }
 
   return { start, replay, resumeAndPlay };
