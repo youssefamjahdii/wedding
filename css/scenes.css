@@ -807,13 +807,12 @@
 }
 @keyframes progStarGlow { from { opacity:.5; } to { opacity:1; } }
 .prog-time {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 200;
-  font-size: 0.62rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--gold);
-  width: 80px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  letter-spacing: 0.05em;
+  color: var(--terra);
+  width: 90px;
   flex-shrink: 0;
 }
 .prog-sep {
