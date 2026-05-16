@@ -7,13 +7,13 @@ const Film = (() => {
   const dots = [];
   let tl = null;  // master GSAP timeline
   let sceneTimelines = [];
-  let musicPaused = false; // flag: waiting for user at music scene
+  let musicSceneEndTime = 0; // timeline position right after music scene hold
 
   /* ─── Scene durations (seconds each scene is fully visible) ─── */
   const HOLD = [
-    3.0,  // 0 Bismillah
+    1.0,  // 1 Bismillah
     4.0,  // 2 Verset
-    1.0,  // 3 Music prompt
+    300,  // 3 Music prompt (user dismisses with button)
     3.5,  // 4 Familles
     4.0,  // 5 Couple
     4.0,  // 6 Save the Date
@@ -140,8 +140,6 @@ const Film = (() => {
           .call(() => {
             const film = document.getElementById('film');
             if (film) film.style.pointerEvents = 'auto';
-            musicPaused = true;
-            setTimeout(() => { if (musicPaused) tl.pause(); }, 50);
           }, [], at + 0.9);
         break;
 
@@ -289,6 +287,7 @@ const Film = (() => {
     for (let i = 0; i < SCENES; i++) {
       sceneIn(i, tl, cursor);
       cursor += IN + HOLD[i];
+      if (i === 2) musicSceneEndTime = cursor; // save jump point
       if (i < SCENES - 1) {
         sceneOut(i, tl, cursor);
         cursor += OUT + GAP;
@@ -341,8 +340,10 @@ const Film = (() => {
   function resumeAndPlay() {
     const film = document.getElementById('film');
     if (film) film.style.pointerEvents = 'none';
-    musicPaused = false;
-    if (tl) tl.play();
+    if (tl) {
+      tl.seek(musicSceneEndTime);
+      tl.play();
+    }
   }
 
   return { start, replay, resumeAndPlay };
