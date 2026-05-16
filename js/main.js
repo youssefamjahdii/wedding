@@ -96,9 +96,8 @@ const Film = (() => {
     const sc   = document.querySelector(sel);
     if (!sc) return;
 
-    // Shared: fade scene in & manage pointer events
-    tl.call(() => sc.classList.add('visible'), [], at);
-    tl.to(sel, { opacity: 1, duration: IN, ease: 'power2.inOut' }, at);
+    // Shared: fade scene in & manage pointer events via autoAlpha
+    tl.to(sel, { autoAlpha: 1, duration: IN, ease: 'power2.inOut' }, at);
 
     // Background color
     tl.to('#bg-color', {
@@ -114,13 +113,13 @@ const Film = (() => {
     switch (idx) {
 
       case 0: // Bismillah
-        tl.to(`${sel} .bismillah-text`, { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, at)
+        tl.to(`${sel} .bismillah-text`, { autoAlpha: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, at)
           .from(`${sel} .bismillah-sub`, { opacity: 0, y: 14, duration: 0.8, ease: 'power2.out' }, at + 0.5)
           .to(`${sel} .bismillah-sub`, { opacity: 1, duration: 0.8 }, at + 0.5);
         break;
 
       case 1: // Verset
-        tl.to(`${sel} .arch-bg`, { opacity: 1, duration: 1.5, ease: 'power2.inOut' }, at)
+        tl.to(`${sel} .arch-bg`, { autoAlpha: 1, duration: 1.5, ease: 'power2.inOut' }, at)
           .call(() => { const a = document.querySelector(`${sel} .arch-bg`); if(a) a.classList.add('draw'); }, [], at + 0.1)
           .from(`${sel} .verse-source-top`, { opacity: 0, y: 10, duration: 0.7 }, at + 0.4)
           .to(`${sel} .verse-source-top`, { opacity: 1, duration: 0.7 }, at + 0.4)
@@ -258,26 +257,24 @@ const Film = (() => {
     // Each scene has a unique exit
     switch (idx) {
       case 0: // Bismillah — float up and fade
-        tl.to(`${sel} .bismillah-text`, { y: -20, opacity: 0, filter: 'blur(8px)', duration: OUT * 0.9 }, at);
-        tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
+        tl.to(`${sel} .bismillah-text`, { y: -20, autoAlpha: 0, filter: 'blur(8px)', duration: OUT * 0.9 }, at);
+        tl.to(sel, { autoAlpha: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;
       case 1: // Verset — slide up
         tl.call(() => unlightVerseWords(), [], at);
-        tl.to(sel, { opacity: 0, y: -20, duration: OUT, ease: 'power2.in' }, at + 0.1);
+        tl.to(sel, { autoAlpha: 0, y: -20, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;
       case 2: // Music prompt
-        tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at);
+        tl.to(sel, { autoAlpha: 0, duration: OUT, ease: 'power2.in' }, at);
         break;
       case 3: // Familles — scale down
-        tl.to(`${sel} .families-names`, { scale: 1.08, opacity: 0, duration: OUT * 0.8 }, at);
-        tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
+        tl.to(`${sel} .families-names`, { scale: 1.08, autoAlpha: 0, duration: OUT * 0.8 }, at);
+        tl.to(sel, { autoAlpha: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;
       default:
-        tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at);
+        tl.to(sel, { autoAlpha: 0, duration: OUT, ease: 'power2.in' }, at);
         break;
     }
-    // Shared: remove visible class after exit
-    tl.call(() => sc.classList.remove('visible'), [], at + OUT);
     // Reset element transforms/opacity after scene is invisible
     tl.set(sel, { clearProps: 'filter,y,scale' }, at + OUT + 0.2);
   }
@@ -330,11 +327,9 @@ const Film = (() => {
     // Re-enable film pointer events (in case paused on music scene)
     const film = document.getElementById('film');
     if (film) film.style.pointerEvents = 'auto';
-    // Clear all visible classes
-    document.querySelectorAll('.scene').forEach(s => s.classList.remove('visible'));
     // Reset all scenes
     document.querySelectorAll('.scene').forEach(s => {
-      gsap.set(s, { opacity: 0, clearProps: 'filter,y,scale,x' });
+      gsap.set(s, { autoAlpha: 0, clearProps: 'filter,y,scale,x' });
     });
     gsap.set('#bg-color', { backgroundColor: BG_COLORS[0] });
     setDot(0); currentScene = 0;
