@@ -141,7 +141,7 @@ const Film = (() => {
             const film = document.getElementById('film');
             if (film) film.style.pointerEvents = 'auto';
             musicPaused = true;
-            tl.pause();
+            setTimeout(() => { if (musicPaused) tl.pause(); }, 50);
           }, [], at + 0.9);
         break;
 
