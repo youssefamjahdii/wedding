@@ -2,7 +2,7 @@
 
 const Film = (() => {
 
-  const SCENES = 11;
+  const SCENES = 10;
   let currentScene = 0;
   const dots = [];
   let tl = null;  // master GSAP timeline
@@ -10,8 +10,7 @@ const Film = (() => {
 
   /* ─── Scene durations (seconds each scene is fully visible) ─── */
   const HOLD = [
-    1.5,  // 0 I&M (reduced delay)
-    3.0,  // 1 Bismillah
+    3.0,  // 0 Bismillah
     4.0,  // 2 Verset
     1.0,  // 3 Music prompt
     3.5,  // 4 Familles
@@ -29,8 +28,7 @@ const Film = (() => {
 
   /* ─── Background colors per scene ─── */
   const BG_COLORS = [
-    '#f5ebe0', // 0 warm parchment
-    '#fdf6ec', // 1 cream
+    '#fdf6ec', // 0 cream
     '#f2e8d8', // 2 lighter linen
     '#fdf6ec', // 3 music prompt
     '#ede0cd', // 4 linen
@@ -113,20 +111,13 @@ const Film = (() => {
     // Per-scene animations
     switch (idx) {
 
-      case 0: // I & M
-        tl.from(`${sel} .initials-i`, { y: -80, opacity: 0, duration: 1.1, ease: 'back.out(1.6)' }, at + 0.1)
-          .from(`${sel} .initials-amp`, { scale: 0.4, opacity: 0, duration: 0.8, ease: 'back.out(2)' }, at + 0.5)
-          .from(`${sel} .initials-m`, { y: -80, opacity: 0, duration: 1.1, ease: 'back.out(1.6)' }, at + 0.6)
-          .from(`${sel} .initials-date`, { opacity: 0, y: 12, duration: 0.8, ease: 'power2.out' }, at + 1.2);
-        break;
-
-      case 1: // Bismillah
+      case 0: // Bismillah
         tl.to(`${sel} .bismillah-text`, { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, at)
           .from(`${sel} .bismillah-sub`, { opacity: 0, y: 14, duration: 0.8, ease: 'power2.out' }, at + 0.5)
           .to(`${sel} .bismillah-sub`, { opacity: 1, duration: 0.8 }, at + 0.5);
         break;
 
-      case 2: // Verset
+      case 1: // Verset
         tl.to(`${sel} .arch-bg`, { opacity: 1, duration: 1.5, ease: 'power2.inOut' }, at)
           .call(() => { const a = document.querySelector(`${sel} .arch-bg`); if(a) a.classList.add('draw'); }, [], at + 0.1)
           .from(`${sel} .verse-source-top`, { opacity: 0, y: 10, duration: 0.7 }, at + 0.4)
@@ -140,7 +131,7 @@ const Film = (() => {
           .to(`${sel} #secret-music-btn`, { opacity: 1, duration: 1 }, at + 4.0);
         break;
 
-      case 3: // Music Prompt
+      case 2: // Music Prompt
         tl.from(`${sel} .couple-pre`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.1)
           .from(`${sel} .scene-ornament`, { opacity: 0, scale: 0.5, duration: 0.6 }, at + 0.3)
           .from(`${sel} .families-sub`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.5)
@@ -148,7 +139,7 @@ const Film = (() => {
           .addPause(); // Pause until user interacts
         break;
 
-      case 4: // Familles
+      case 3: // Familles
         tl.call(() => { Particles.startPetals(); }, [], at + 0.1)
           .from(`${sel} .families-pre`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.1)
           .to(`${sel} .families-pre`, { opacity: 1, duration: 0.6 }, at + 0.1)
@@ -167,7 +158,7 @@ const Film = (() => {
           .to(`${sel} .families-sub`, { opacity: 1, duration: 0.7 }, at + 1.5);
         break;
 
-      case 5: // Couple
+      case 4: // Couple
         tl.from(`${sel} .couple-pre`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.1)
           .to(`${sel} .couple-pre`, { opacity: 1, duration: 0.6 }, at + 0.1)
           .to(`${sel} #name-svg-wrap`, {
@@ -184,7 +175,7 @@ const Film = (() => {
           .to(`${sel} .couple-phrase`, { opacity: 1, duration: 1 }, at + 1.5);
         break;
 
-      case 6: // Save the Date
+      case 5: // Save the Date
         tl.from(`${sel} .std-eyebrow`, { opacity: 0, y: 10, duration: 0.5 }, at + 0.1)
           .to(`${sel} .std-eyebrow`, { opacity: 1, duration: 0.5 }, at + 0.1)
           .from(`${sel} .std-save`, { opacity: 0, y: 8, duration: 0.5 }, at + 0.3)
@@ -199,7 +190,7 @@ const Film = (() => {
           .to(`${sel} .std-cal`, { opacity: 1, duration: 0.7 }, at + 2.1);
         break;
 
-      case 7: // Dar El Ghalia
+      case 6: // Dar El Ghalia
         tl.from(`${sel} .venue-eyebrow`, { opacity: 0, y: 8, duration: 0.5 }, at + 0.1)
           .to(`${sel} .venue-eyebrow`, { opacity: 1, duration: 0.5 }, at + 0.1)
           .from(`${sel} .venue-name`, { opacity: 0, y: 24, filter: 'blur(8px)', duration: 1.1, ease: 'power2.out' }, at + 0.3)
@@ -212,7 +203,7 @@ const Film = (() => {
           .to(`${sel} .venue-waze`, { opacity: 1, duration: 0.7 }, at + 2.2);
         break;
 
-      case 8: // Countdown
+      case 7: // Countdown
         tl.from(`${sel} .cd-eyebrow`, { opacity: 0, y: 8, duration: 0.5 }, at + 0.1)
           .to(`${sel} .cd-eyebrow`, { opacity: 1, duration: 0.5 }, at + 0.1)
           .from(`${sel} .cd-title`, { opacity: 0, y: 16, duration: 0.8 }, at + 0.3)
@@ -227,7 +218,7 @@ const Film = (() => {
           .call(() => Countdown.start(), [], at + 0.5);
         break;
 
-      case 9: // Programme
+      case 8: // Programme
         tl.from(`${sel} .prog-eyebrow`, { opacity: 0, y: 8, duration: 0.5 }, at + 0.1)
           .to(`${sel} .prog-eyebrow`, { opacity: 1, duration: 0.5 }, at + 0.1)
           .from(`${sel} .prog-title`, { opacity: 0, y: 16, duration: 0.8 }, at + 0.3)
@@ -240,7 +231,7 @@ const Film = (() => {
         });
         break;
 
-      case 10: // Merci
+      case 9: // Merci
         tl.call(() => { Particles.launchConfetti(); }, [], at + 0.3)
           .to(`${sel} .merci-big`, {
             opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.4, ease: 'power2.out',
@@ -260,21 +251,18 @@ const Film = (() => {
     const sel = `#scene-${idx + 1}`;
     // Each scene has a unique exit
     switch (idx) {
-      case 0: // I&M — dissolve into dust (handled by opacity)
-        tl.to(sel, { opacity: 0, filter: 'blur(6px)', duration: OUT, ease: 'power2.in' }, at);
-        break;
-      case 1: // Bismillah — float up and fade
+      case 0: // Bismillah — float up and fade
         tl.to(`${sel} .bismillah-text`, { y: -20, opacity: 0, filter: 'blur(8px)', duration: OUT * 0.9 }, at);
         tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;
-      case 2: // Verset — slide up
+      case 1: // Verset — slide up
         tl.call(() => unlightVerseWords(), [], at);
         tl.to(sel, { opacity: 0, y: -20, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;
-      case 3: // Music prompt
+      case 2: // Music prompt
         tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at);
         break;
-      case 4: // Familles — scale down
+      case 3: // Familles — scale down
         tl.to(`${sel} .families-names`, { scale: 1.08, opacity: 0, duration: OUT * 0.8 }, at);
         tl.to(sel, { opacity: 0, duration: OUT, ease: 'power2.in' }, at + 0.1);
         break;

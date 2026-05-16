@@ -60,26 +60,16 @@
     <!-- Progress dots -->
     <div id="progress-dots"></div>
 
-    <!-- ── SCENE 1: I & M ── -->
+    <!-- ── SCENE 1: Bismillah ── -->
     <div class="scene light-bg" id="scene-1">
-      <div class="initials-wrap">
-        <span class="initials-i">I</span>
-        <span class="initials-amp">&amp;</span>
-        <span class="initials-m">M</span>
-        <p class="initials-date">29 Août 2026 · Dar El Ghalia</p>
-      </div>
-    </div>
-
-    <!-- ── SCENE 2: Bismillah ── -->
-    <div class="scene light-bg" id="scene-2">
       <div class="scene-ornament"><span>✦</span></div>
       <p class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       <p class="bismillah-sub">Au nom de Dieu, le Tout Miséricordieux, le Très Miséricordieux</p>
       <div class="scene-ornament" style="margin-top:20px;"><span>✦</span></div>
     </div>
 
-    <!-- ── SCENE 3: Verset Ar-Rum 21 ── -->
-    <div class="scene light-bg" id="scene-3">
+    <!-- ── SCENE 2: Verset Ar-Rum 21 ── -->
+    <div class="scene light-bg" id="scene-2">
       <!-- Moroccan Arch Background -->
       <div class="arch-bg">
         <svg class="moroccan-arch" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg"
@@ -112,20 +102,20 @@
       </div>
     </div>
 
-    <!-- ── SCENE 4: Interaction (Musique) ── -->
-    <div class="scene light-bg" id="scene-4">
+    <!-- ── SCENE 3: Interaction (Musique) ── -->
+    <div class="scene light-bg" id="scene-3">
       <p class="couple-pre" style="opacity:1;">Un moment magique</p>
       <div class="scene-ornament" style="margin-bottom: 20px;"><span>✦</span></div>
       <p class="families-sub" style="opacity:1; margin-bottom: 35px; font-size: 1.4rem; max-width: 450px; margin-left: auto; margin-right: auto;">Avez-vous hâte de célébrer ce grand jour avec nous ?</p>
       <div class="btn-wrap" style="display:flex; flex-direction:column; align-items:center;">
-        <button onclick="if(window.Music){Music.fadeIn(2000);} this.innerHTML='Merci ♡'; this.style.pointerEvents='none'; setTimeout(() => Film.resumeAndPlay(), 800);" style="pointer-events:auto; background:var(--terra); color:var(--cream); border:none; padding:14px 45px; border-radius:4px; cursor:pointer; font-size:1.2rem; font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em; box-shadow:0 4px 15px rgba(193,103,79,0.2); transition: all 0.3s;">
+        <button onclick="if(window.Music) Music.toggle(); Film.resumeAndPlay();" style="pointer-events:auto; background:var(--terra); color:var(--cream); border:none; padding:14px 45px; border-radius:4px; cursor:pointer; font-size:1.2rem; font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em; box-shadow:0 4px 15px rgba(193,103,79,0.2); transition: all 0.3s;">
           Oui, avec grande joie !
         </button>
       </div>
     </div>
 
-    <!-- ── SCENE 5: Les Familles ── -->
-    <div class="scene light-bg" id="scene-5">
+    <!-- ── SCENE 4: Les Familles ── -->
+    <div class="scene light-bg" id="scene-4">
       <p class="families-pre">Avec toute leur joie</p>
       <div class="scene-ornament" style="margin-bottom: 20px;"><span>✦</span></div>
       
@@ -143,8 +133,8 @@
       <p class="families-sub" style="margin-top:24px;">ont l'immense bonheur de vous annoncer l'union de leurs enfants</p>
     </div>
 
-    <!-- ── SCENE 6: Imane & Mohamed ── -->
-    <div class="scene light-bg" id="scene-6">
+    <!-- ── SCENE 5: Imane & Mohamed ── -->
+    <div class="scene light-bg" id="scene-5">
       <p class="couple-pre">Deux âmes, une histoire</p>
       <div id="name-svg-wrap">
         <p class="couple-names-text" style="font-size: clamp(2.5rem, 9vw, 5.5rem); color: var(--terra);">
@@ -159,8 +149,8 @@
       <p class="couple-phrase" style="font-size: clamp(1.3rem, 3.5vw, 1.8rem); color: var(--mocha); font-weight: 400; max-width: 600px;">« Deux âmes qui se cherchaient,<br>deux cœurs qui se sont trouvés —<br>aujourd'hui, ils s'unissent pour l'éternité. »</p>
     </div>
 
-    <!-- ── SCENE 7: Save the Date ── -->
-    <div class="scene light-bg" id="scene-7">
+    <!-- ── SCENE 6: Save the Date ── -->
+    <div class="scene light-bg" id="scene-6">
       <p class="std-eyebrow">À retenir</p>
       <h2 class="std-save">Save the Date</h2>
       <div class="scene-ornament"><span>✦</span></div>
@@ -180,8 +170,8 @@
       </a>
     </div>
 
-    <!-- ── SCENE 8: Dar El Ghalia ── -->
-    <div class="scene light-bg" id="scene-8">
+    <!-- ── SCENE 7: Dar El Ghalia ── -->
+    <div class="scene light-bg" id="scene-7">
       <p class="venue-eyebrow">Le Lieu</p>
       <p class="venue-name">Dar El Ghalia</p>
       <p class="venue-addr" style="margin-top: 30px; margin-bottom: 24px; font-size:clamp(0.8rem, 2vw, 1.2rem);">📍 Bouskoura</p>
@@ -243,8 +233,8 @@
       </a>
     </div>
 
-    <!-- ── SCENE 9: Compte à rebours ── -->
-    <div class="scene light-bg" id="scene-9">
+    <!-- ── SCENE 8: Compte à rebours ── -->
+    <div class="scene light-bg" id="scene-8">
       <p class="cd-eyebrow">Le grand jour approche</p>
       <h2 class="cd-title" style="color:var(--terra);">Compte à rebours</h2>
       <div class="cd-grid">
@@ -256,8 +246,8 @@
       <p class="cd-info" style="margin-top: 50px;">Samedi 29 Août 2026 · Dar El Ghalia · 17h00</p>
     </div>
 
-    <!-- ── SCENE 10: Programme ── -->
-    <div class="scene light-bg" id="scene-10">
+    <!-- ── SCENE 9: Programme ── -->
+    <div class="scene light-bg" id="scene-9">
       <p class="prog-eyebrow">Le Programme</p>
       <h2 class="prog-title">Le déroulé de la soirée</h2>
       <div class="prog-list">
@@ -274,8 +264,8 @@
       </div>
     </div>
 
-    <!-- ── SCENE 11: Merci ── -->
-    <div class="scene light-bg" id="scene-11">
+    <!-- ── SCENE 10: Merci ── -->
+    <div class="scene light-bg" id="scene-10">
       <p class="merci-big" style="font-size: clamp(4rem, 15vw, 7rem);">Merci</p>
       <div class="merci-divider">
         <div class="merci-divider-gem"></div>

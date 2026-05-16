@@ -26,6 +26,8 @@ const Intro = (() => {
       // Flash and transition when video ends
       vid.onended = () => {
         Particles.flash('rgba(245,235,224,0.9)', 400);
+        
+        if (onComplete) onComplete();
 
         screen.style.transition = 'opacity 1.5s ease, visibility 1.5s';
         screen.style.opacity = '0';
@@ -33,7 +35,6 @@ const Intro = (() => {
 
         setTimeout(() => {
           screen.style.display = 'none';
-          if (onComplete) onComplete();
         }, 1500);
       };
     });
