@@ -96,8 +96,10 @@ const Film = (() => {
     const sc   = document.querySelector(sel);
     if (!sc) return;
 
-    // Shared: fade scene in & manage pointer events via autoAlpha
+    // Shared: fade scene in
     tl.to(sel, { autoAlpha: 1, duration: IN, ease: 'power2.inOut' }, at);
+    // Grant pointer events only AFTER the scene is fully visible
+    tl.call(() => { if (sc) sc.classList.add('scene-live'); }, [], at + IN);
 
     // Background color
     tl.to('#bg-color', {
@@ -138,7 +140,7 @@ const Film = (() => {
           .from(`${sel} .families-sub`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.5)
           .from(`${sel} .btn-wrap`, { opacity: 0, y: 10, duration: 0.6 }, at + 0.8)
           .call(() => {
-            // Scene 3 logic (nothing needed here now as .visible handles it)
+            // Pause logic handled by 300s HOLD + seek in resumeAndPlay
           }, [], at + 0.9);
         break;
 
@@ -254,6 +256,8 @@ const Film = (() => {
     const sel = `#scene-${idx + 1}`;
     const sc = document.querySelector(sel);
     if (!sc) return;
+    // Revoke pointer events IMMEDIATELY when exit begins — prevents phantom clicks
+    tl.call(() => { if (sc) sc.classList.remove('scene-live'); }, [], at);
     // Each scene has a unique exit
     switch (idx) {
       case 0: // Bismillah — float up and fade
@@ -327,8 +331,9 @@ const Film = (() => {
     // Re-enable film pointer events (in case paused on music scene)
     const film = document.getElementById('film');
     if (film) film.style.pointerEvents = 'auto';
-    // Reset all scenes
+    // Reset all scenes — revoke all pointer events and reset transforms
     document.querySelectorAll('.scene').forEach(s => {
+      s.classList.remove('scene-live');
       gsap.set(s, { autoAlpha: 0, clearProps: 'filter,y,scale,x' });
     });
     gsap.set('#bg-color', { backgroundColor: BG_COLORS[0] });

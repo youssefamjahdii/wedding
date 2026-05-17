@@ -160,13 +160,18 @@
   text-align: center;
   padding: clamp(50px, 8vw, 80px) clamp(24px, 6vw, 60px);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   overflow: hidden;
 }
-.scene.visible {
+/* Only the ACTIVE scene (and its interactive children) receives pointer events */
+.scene.scene-live {
   pointer-events: auto;
 }
-
+.scene.scene-live button,
+.scene.scene-live a {
+  pointer-events: auto;
+}
 /* Zellige grid per scene */
 .scene::before {
   content: '';
@@ -570,7 +575,6 @@
   opacity: 0;
   transform: translateY(10px);
   transition: background 0.35s, border-color 0.35s;
-  pointer-events: auto;
   position: relative; overflow: hidden;
 }
 .std-cal::before {
@@ -652,7 +656,6 @@
   text-decoration: none;
   cursor: pointer;
   opacity: 0;
-  pointer-events: auto;
   transition: background 0.35s, border-color 0.35s;
   position: relative; overflow: hidden;
 }
@@ -900,7 +903,6 @@
   text-transform: uppercase;
   cursor: pointer;
   opacity: 0;
-  pointer-events: auto;
   transition: background 0.35s, border-color 0.35s;
   position: relative; overflow: hidden;
 }
